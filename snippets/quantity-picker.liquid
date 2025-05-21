@@ -1,0 +1,5 @@
+<div class="qty-picker" data-qty-root>
+  <button type="button" class="qty-btn" data-qty-decrease aria-label="{{ 'cart.general.reduce_quantity' | t }}">−</button>
+  <input type="number" min="0" {% if available %}max="{{ variant.inventory_quantity }}"{% endif %} value="0" inputmode="numeric" pattern="[0-9]*" data-qty-input>
+  <button type="button" class="qty-btn" data-qty-increase aria-label="{{ 'cart.general.increase_quantity' | t }}">＋</button>
+</div>

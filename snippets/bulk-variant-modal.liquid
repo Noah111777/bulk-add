@@ -1,0 +1,23 @@
+<div id="BulkModal" class="bulk-modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="bulk-modal__inner" role="document">
+    <button class="bulk-modal__close" aria-label="{{ 'general.accessibility.close_modal' | t }}">×</button>
+
+    <h2 class="h3"></h2>
+
+    <table class="bulk-table">
+      <thead>
+        <tr><th>{{ 'cart.label.product' | t }}</th><th>{{ 'cart.label.price' | t }}</th><th>{{ 'cart.label.quantity' | t }}</th><th>{{ 'cart.label.total' | t }}</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <footer class="bulk-footer">
+      <div>
+        <strong>Total items:</strong> <span id="BulkTotalItems">0</span><br>
+        <strong>Subtotal:</strong> <span id="BulkSubtotal">{{ 0 | money }}</span>
+      </div>
+      <button class="button button--secondary js-view-cart">{{ 'cart.general.view_cart' | t }}</button>
+    </footer>
+    <div id="BulkLiveRegion" class="visually-hidden" aria-live="polite"></div>
+  </div>
+</div>
