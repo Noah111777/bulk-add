@@ -1,0 +1,275 @@
+<form action="{{ routes.cart_url }}" method="post" novalidate data-location="header" class="cart__drawer-form">
+  <div class="cart__scrollable">
+    <div data-products></div>
+    {%- render 'cart-recommendations', location: 'drawer' -%}
+    <div class="cart__item-row button-row">
+      <button type="button" id="hc-cart-ajax--clear" class="btn btn--secondary clear-cart-btn">
+        <span>Clear Cart</span>
+      </button>
+
+      {% if settings.cart_notes_enable %}
+        <button type="button" class="btn btn--secondary create-note-btn" id="createNoteBtn">
+          Create Order Note
+        </button>
+        <textarea name="note" class="input-full cart__note hide" id="CartHeaderNote">{{ cart.note }}</textarea>
+      {% endif %}
+    </div>
+
+    {% if settings.cart_notes_enable %}
+      <div class="cart__item-row">
+        <!-- Removed duplicate textarea -->
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="cart__footer">
+    <div class="cart__item-sub cart__item-row cart__item--subtotal">
+      <div>{{ 'cart.general.subtotal' | t }}</div>
+      <div data-subtotal>{{ cart.total_price | money }}</div>
+    </div>
+
+    <div data-discounts></div>
+
+    {% if settings.cart_terms_conditions_enable %}
+      <div class="cart__item-row cart__terms">
+        <input type="checkbox" id="CartTermsHeader" class="cart__terms-checkbox">
+        <label for="CartTermsHeader" class="text-label">
+          <small>
+            {% if settings.cart_terms_conditions_page != blank %}
+              {{ 'cart.general.terms_html' | t: url: settings.cart_terms_conditions_page.url }}
+            {% else %}
+              {{ 'cart.general.terms' | t }}
+            {% endif %}
+          </small>
+        </label>
+      </div>
+    {% endif %}
+
+    <div class="cart__item-row cart__checkout-wrapper payment-buttons">
+      <button type="submit" name="checkout" data-terms-required="{{ settings.cart_terms_conditions_enable }}" class="btn cart__checkout">
+        {{ 'cart.general.checkout' | t }}
+      </button>
+
+      {% if additional_checkout_buttons and settings.cart_additional_buttons %}
+        <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+      {% endif %}
+    </div>
+
+    <div class="cart__item-row--footer text-center">
+      <small>{{ 'cart.general.shipping_at_checkout' | t }}</small>
+    </div>
+  </div>
+</form>
+
+<div class="site-header__cart-empty">{{ 'cart.general.empty' | t }}</div>
+
+<!-- Note Modal -->
+<div id="noteModal" class="note-modal">
+  <div class="note-modal-content">
+    <span class="note-modal-close">&times;</span>
+    <h3>Add Order Note</h3>
+    <textarea id="noteModalText" class="input-full" placeholder="Enter your note here...">{{ cart.note }}</textarea>
+    <button type="button" class="btn" id="saveNoteBtn">Save Note</button>
+    <!-- Add loading spinner -->
+    <div id="noteLoadingSpinner" class="note-loading-spinner hide">
+      <div class="spinner-icon"></div>
+      <p>Saving your note...</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.note-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.note-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#noteModalText {
+  width: 100%;
+  height: calc(50vh - 180px);  
+  margin: 15px 0;
+  padding: 10px;
+  resize: none;
+  flex: 1;
+}
+
+#saveNoteBtn {
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+}
+
+/* Loading spinner styles */
+.note-loading-spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.note-loading-spinner p {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.spinner-icon {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #000000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hide {
+  display: none;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.clear-cart-btn,
+.create-note-btn {
+  margin: 10px 0;
+  padding: 12px 16px;
+  border-radius: 80px;
+  font-size: 13px !important;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  width: auto;
+  min-width: 150px;
+  height: auto;
+  line-height: normal;
+}
+
+.clear-cart-btn span {
+  font-weight: bold;
+  font-size: 13px !important;
+  line-height: normal;
+}
+
+/* Reset any theme button styles */
+.btn.clear-cart-btn {
+  height: auto;
+  line-height: normal;
+  padding: 12px 16px;
+}
+
+.clear-cart-btn:hover,
+.create-note-btn:hover {
+  background-color: #000000;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('noteModal');
+    const btn = document.getElementById('createNoteBtn');
+    const closeBtn = document.querySelector('.note-modal-close');
+    const saveBtn = document.getElementById('saveNoteBtn');
+    const noteTextarea = document.getElementById('noteModalText');
+    const cartNoteTextarea = document.getElementById('CartHeaderNote');
+    const loadingSpinner = document.getElementById('noteLoadingSpinner');
+
+    btn.onclick = function() {
+      modal.style.display = "block";
+      noteTextarea.value = cartNoteTextarea.value;
+      noteTextarea.focus();
+      noteTextarea.setSelectionRange(noteTextarea.value.length, noteTextarea.value.length);
+    }
+
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    saveBtn.onclick = function() {
+      // Show loading spinner
+      loadingSpinner.classList.remove('hide');
+      
+      // Disable the save button to prevent multiple clicks
+      saveBtn.disabled = true;
+      
+      // Update the hidden textarea
+      cartNoteTextarea.value = noteTextarea.value;
+      
+      // Trigger cart note update
+      const cartForm = document.querySelector('.cart__drawer-form');
+      if (cartForm) {
+        fetch(window.Shopify.routes.root + 'cart/update.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            note: noteTextarea.value
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Add a delay before closing the modal (1.5 seconds)
+          setTimeout(function() {
+            loadingSpinner.classList.add('hide');
+            modal.style.display = "none";
+            saveBtn.disabled = false;
+          }, 1500);
+        })
+        .catch(error => {
+          console.error('Error updating cart note:', error);
+          loadingSpinner.classList.add('hide');
+          saveBtn.disabled = false;
+          alert('There was an error saving your note. Please try again.');
+        });
+      }
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  });
+</script>

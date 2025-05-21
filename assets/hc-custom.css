@@ -1,0 +1,163 @@
+.hc-atc-form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* HC - Button animation - 29 Jan '24 */
+.hc-atc.btn.btn--small {
+  width: 120px;
+}
+@keyframes scaleAnimation {
+  0%, 100% {
+    transform: scale(0.5);
+  }
+  25%, 75% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+}
+.dot-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+}
+.hc-dot {
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin: 0 5px;
+  animation: scaleAnimation 1.4s infinite ease;
+}
+.hc-dot:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.hc-dot:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.hc-dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.hc-dot-acive .hc-atc-text{
+  display: none;
+}
+.hc-dot-acive .dot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* HC - Search form adjustments - 29 Jan '24 */
+.hc-add-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+.hc-quantity.js-qty__wrapper {
+  margin-right: 15px;
+}
+input.js-quantity-selector.js-qty__num.prodqty{
+  font-size: 16px !important;
+}
+@media only screen and (max-width: 480px) {
+  .hc-atc.btn.btn--small {
+    padding: 8px;
+  }
+  div#PredictiveResults .grid-item.grid-product {
+    width: 50%;
+  }
+  .hc-add-form{
+    display: block;
+  }
+  .hc-quantity.js-qty__wrapper {
+    margin-bottom: 15px;
+  }
+  .hc-quantity.js-qty__wrapper {
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+  input.js-quantity-selector.js-qty__num.prodqty{
+    font-size: 14px !important;
+  }
+}
+/* HC - Carousel added - 21 Mar '24 */
+.hc-slideshow {
+  margin-top: 40px;
+  text-align: center;
+}
+.hc-slideshow h2 {
+  margin: 40px 0;
+}
+.slick-dots {
+  position: static !important;
+}
+.hc-slideshow-wrapper h2 {
+  margin: 30px auto;
+  text-align: center;
+}
+.hc-arrow-left.slick-arrow {
+  position: absolute;
+  top: 40%;
+  left: -20px;
+  cursor: pointer;
+  background-color: var(--colorBody);
+  box-shadow: 0 5px 5px #0000001a;
+  width: 54px;
+  height: 54px;
+  text-align: center;
+  border-radius: 50%;
+  z-index: 2;
+}
+.hc-arrow-right.slick-arrow {
+  position: absolute;
+  top: 40%;
+  right: -20px;
+  cursor: pointer;
+  background-color: var(--colorBody);
+  box-shadow: 0 5px 5px #0000001a;
+  width: 54px;
+  height: 54px;
+  text-align: center;
+  border-radius: 50%;
+  z-index: 2;
+}
+.hc-arrow-left.slick-arrow .fa, .hc-arrow-right.slick-arrow .fa {
+  font-size: 20px;
+}
+.hc-slideshow-wrapper .grid-product__price {
+  font-weight: bold;
+}
+.hc-custom-desc {
+  margin: 5px 0;
+}
+.hc-slideshow-wrapper.page-width {
+  padding-top: 20px;
+}
+.hc-carousel-qty{
+  font-size: 16px !important;
+}
+.hc-slideshow-wrapper .grid__image-ratio img{
+  animation: none;
+  opacity: 1;
+}
+@media only screen and (max-width: 480px) {
+  .hc-arrow-left.slick-arrow {
+    left: -10px;
+  }
+  .hc-arrow-right.slick-arrow {
+    right: -10px;
+  }
+}
+/* HC - Placeholder image - 09 May '24 */
+.hc-placeholder-img img {
+  display: block;
+  opacity: 1;
+}
+/* HC - Featured carousel adjustments - 17 Jun '24 */
+[data-grid-style*=gridlines] .hc-slider .grid-product{
+  padding: 10px;
+  margin: 10px;
+}

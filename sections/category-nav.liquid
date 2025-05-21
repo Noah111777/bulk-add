@@ -1,0 +1,486 @@
+{% schema %}  {
+    "name": "Category Navigation",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Navigation Categories"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading (optional)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "category",
+        "name": "Category",
+        "settings": [
+          {
+            "type": "text",
+            "id": "category_name",
+            "label": "Category Name",
+            "default": "Category"
+          },
+          {
+            "type": "text",
+            "id": "section_id",
+            "label": "Section ID to scroll to",
+            "default": "section-1"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Category Navigation",
+        "blocks": [
+          {
+            "type": "category"
+          },
+          {
+            "type": "category"
+          },
+          {
+            "type": "category"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  
+  <div class="category-nav-container">
+    {% if section.settings.heading != blank %}
+      <div class="category-heading">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+    <div class="swipe-text">
+      <span class="mobile-text">Swipe to view more</span>
+      <span class="desktop-text">Click arrows to view more</span>
+      <svg class="swipe-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </div>
+    <div class="scroll-indicator"></div>
+    <div class="category-nav-wrapper">
+      <button class="scroll-button scroll-left" aria-label="Scroll left">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <div class="category-slider" id="categorySlider">
+        {% for block in section.blocks %}
+          <button class="category-pill" data-section="{{ block.settings.section_id }}">
+            {{ block.settings.category_name }}
+          </button>
+        {% endfor %}
+      </div>
+      <button class="scroll-button scroll-right" aria-label="Scroll right">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <style>
+  .category-nav-container {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 28px 0;
+    z-index: 0;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+  }
+  
+  .category-heading {
+    margin: 0 auto;
+    max-width: 1800px;
+    width: 100%;
+    padding: 0 18px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .category-heading h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .category-nav-wrapper {
+    max-width: 1800px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .category-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 18px;
+    gap: 18px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    width: 100%;
+    scroll-padding: 0 18px;
+    cursor: grab;
+  }
+  
+  .category-slider.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto; /* Disable smooth scrolling during drag */
+    user-select: none;
+  }
+  
+  .category-slider::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  .scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #000000;
+    border: 1px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: opacity 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .scroll-button svg {
+    stroke: white;
+  }
+  
+  .scroll-button:hover {
+    background: #333333;
+    border-color: #333333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .scroll-button.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .scroll-left {
+    left: 4px;
+  }
+  
+  .scroll-right {
+    right: 4px;
+  }
+  
+  .category-pill {
+    background: white;
+    border: 1px solid #555555;
+    padding: 14px 28px;
+    border-radius: 100px;
+    white-space: nowrap;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+    user-select: none;
+  }
+  
+  .category-pill:hover {
+    background: #000;
+    color: white;
+  }
+  
+  .category-pill.active {
+    background: #000;
+    color: white;
+    border-color: #555555;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .category-nav-container {
+      padding: 23px 0;
+    }
+  
+    .category-slider {
+      gap: 14px;
+    }
+    
+    .category-pill {
+      padding: 11.5px 23px;
+      font-size: 16px;
+    }
+    
+    /* Hide scroll buttons completely on mobile */
+    .scroll-button {
+      display: none;
+    }
+    
+    .category-heading {
+      padding: 0 14px;
+      margin-bottom: 15px;
+    }
+    
+    .category-heading h2 {
+      font-size: 20px;
+    }
+  }
+  
+  .scroll-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: #000;
+    width: 0%;
+    transition: width 0.1s;
+    z-index: 0;
+  }
+  
+  .swipe-text {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  
+  .swipe-arrow {
+    display: inline-block;
+    vertical-align: middle;
+    stroke: #666;
+  }
+  
+  .mobile-text {
+    display: none;
+  }
+  
+  .desktop-text {
+    display: none;
+  }
+  
+  /* Desktop styles */
+  @media screen and (min-width: 769px) {
+    .swipe-text {
+      display: flex;
+    }
+    
+    .desktop-text {
+      display: block;
+    }
+  }
+  
+  /* Mobile styles */
+  @media screen and (max-width: 768px) {
+    .swipe-text {
+      display: flex;
+    }
+    
+    .mobile-text {
+      display: block;
+    }
+
+    .category-nav-container {
+      padding: 16px 0 23px;
+    }
+  }
+  </style>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const categorySlider = document.querySelector('.category-slider');
+    const scrollLeftButton = document.querySelector('.scroll-left');
+    const scrollRightButton = document.querySelector('.scroll-right');
+    const categoryPills = document.querySelectorAll('.category-pill');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    
+    // Update scroll indicator width
+    function updateScrollIndicator() {
+        const maxScroll = categorySlider.scrollWidth - categorySlider.clientWidth;
+        const currentScroll = categorySlider.scrollLeft;
+        const scrollPercentage = (currentScroll / maxScroll) * 100;
+        scrollIndicator.style.width = `${scrollPercentage}%`;
+    }
+
+    // Add scroll indicator update to existing scroll event
+    categorySlider.addEventListener('scroll', () => {
+        updateScrollButtons();
+        updateScrollIndicator();
+    });
+
+    // Update indicator on window resize
+    window.addEventListener('resize', () => {
+        updateScrollButtons();
+        updateScrollIndicator();
+    });
+
+    // Initialize scroll indicator
+    updateScrollIndicator();
+    
+    // Click & Drag functionality
+    let isMouseDown = false;
+    let startX;
+    let scrollLeft;
+    let lastClickTime = 0;
+    
+    categorySlider.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+      categorySlider.classList.add('dragging');
+      startX = e.pageX - categorySlider.offsetLeft;
+      scrollLeft = categorySlider.scrollLeft;
+      
+      // Store click time to differentiate between clicks and drags
+      lastClickTime = new Date().getTime();
+    });
+    
+    categorySlider.addEventListener('mouseleave', () => {
+      isMouseDown = false;
+      categorySlider.classList.remove('dragging');
+    });
+    
+    categorySlider.addEventListener('mouseup', () => {
+      isMouseDown = false;
+      categorySlider.classList.remove('dragging');
+    });
+    
+    categorySlider.addEventListener('mousemove', (e) => {
+      if (!isMouseDown) return;
+      
+      const x = e.pageX - categorySlider.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed multiplier
+      categorySlider.scrollLeft = scrollLeft - walk;
+      
+      // Prevent click events if dragging
+      if (Math.abs(startX - x) > 5) {
+        categorySlider.classList.add('dragging');
+      }
+    });
+    
+    function updateScrollButtons() {
+      const { scrollLeft, scrollWidth, clientWidth } = categorySlider;
+      
+      // Show/hide left scroll button
+      if (scrollLeft > 0) {
+        scrollLeftButton.classList.add('visible');
+      } else {
+        scrollLeftButton.classList.remove('visible');
+      }
+      
+      // Show/hide right scroll button
+      if (scrollLeft < scrollWidth - clientWidth - 1) {
+        scrollRightButton.classList.add('visible');
+      } else {
+        scrollRightButton.classList.remove('visible');
+      }
+    }
+    
+    // Initialize scroll buttons
+    updateScrollButtons();
+    
+    // Scroll amount for button clicks (seven category pill widths + gaps)
+    const getScrollAmount = () => {
+      const pill = categorySlider.querySelector('.category-pill');
+      const gap = parseInt(getComputedStyle(categorySlider).gap);
+      return (pill.offsetWidth + gap) * 7;
+    };
+    
+    // Add click handlers for scroll buttons
+    scrollLeftButton.addEventListener('click', () => {
+      categorySlider.scrollBy({
+        left: -getScrollAmount(),
+        behavior: 'smooth'
+      });
+    });
+    
+    scrollRightButton.addEventListener('click', () => {
+      categorySlider.scrollBy({
+        left: getScrollAmount(),
+        behavior: 'smooth'
+      });
+    });
+    
+    // Update scroll buttons on scroll
+    categorySlider.addEventListener('scroll', updateScrollButtons);
+    
+    // Update scroll buttons on resize
+    window.addEventListener('resize', updateScrollButtons);
+    
+    // Category pill click handler with drag prevention
+    categoryPills.forEach(pill => {
+      pill.addEventListener('click', function(e) {
+        const clickTime = new Date().getTime();
+        const timeDiff = clickTime - lastClickTime;
+        
+        // Only handle click if not dragging (checking time difference and drag class)
+        if (timeDiff < 200 && !categorySlider.classList.contains('dragging')) {
+          // Remove active class from all pills
+          categoryPills.forEach(p => p.classList.remove('active'));
+          
+          // Add active class to clicked pill
+          this.classList.add('active');
+          
+          // Get the target section
+          const targetSection = document.getElementById(this.dataset.section);
+          
+          if (targetSection) {
+            const headerOffset = document.querySelector('.category-nav-container').offsetHeight;
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  
+    // Highlight active section on scroll
+    let timeout;
+    window.addEventListener('scroll', function() {
+      if (timeout) {
+        window.cancelAnimationFrame(timeout);
+      }
+      
+      timeout = window.requestAnimationFrame(function() {
+        const sections = Array.from(categoryPills).map(pill => 
+          document.getElementById(pill.dataset.section)
+        ).filter(Boolean);
+        
+        const headerHeight = document.querySelector('.category-nav-container').offsetHeight;
+        
+        // Find the current section
+        let currentSection = sections.find(section => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= headerHeight + 50 && rect.bottom > headerHeight;
+        });
+        
+        // Update active pill
+        categoryPills.forEach(pill => {
+          if (currentSection && pill.dataset.section === currentSection.id) {
+            pill.classList.add('active');
+          } else {
+            pill.classList.remove('active');
+          }
+        });
+      });
+    });
+  });
+  </script>

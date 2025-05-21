@@ -1,0 +1,429 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction }}">
+<head>
+  <!-- EASYGIFT SCRIPT -->
+  <script type="text/javascript"src="https://cdn.506.io/eg/script.js?shop={{ shop.permanent_domain }}{% if customer %}&id={{ customer.id | escape_once }}&order_count={{ customer.orders_count | escape_once }}&total_spent={{ customer.total_spent | escape_once }}&tags={{ customer.tags | join: "," | escape_once }}{% endif %}"></script>
+  <!-- END EASYGIFT SCRIPT -->
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
+  <link rel="preload" as="script" href="{{ 'theme.js' | asset_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com">
+  <link rel="preconnect" href="https://fonts.shopifycdn.com">
+  <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+  <link rel="dns-prefetch" href="https://maps.googleapis.com">
+  <link rel="dns-prefetch" href="https://maps.gstatic.com">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+{%- else -%}
+    <link rel="shortcut icon" href="{{ 'default-favicon.png' | asset_url }}" type="image/png" />
+{%- endif -%}
+
+
+  {%- render 'seo-title' -%}
+
+  {%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- render 'social-meta-tags' -%}
+
+  {%- if shop.enabled_currencies.size > 1 -%}
+    <link rel="stylesheet" href="{{ 'country-flags.css' | asset_url | split: '?' | first }}">
+  {%- endif -%}
+
+  {%- render 'font-face' -%}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {%- render 'css-variables' -%}
+
+  {% comment %}HC - ATC button - 26 Jan '24 {% endcomment %}
+  {{ 'hc-custom.css' | asset_url | stylesheet_tag }}
+  {{ 'hc-custom.js' | asset_url | script_tag }}  
+
+  <script>
+    var hcImage = '{{ 'placeholder.webp' | file_url }}';
+  </script>
+  
+  {%- liquid
+    assign enableSuperScript = false
+    unless shop.money_format contains 'money' or shop.money_format contains '.'
+      if settings.superscript_decimals
+        if shop.money_format contains '{{amount}}' or shop.money_format contains '{{ amount }}'
+          assign enableSuperScript = true
+        elsif shop.money_format contains '{{amount_with_comma_separator}}' or shop.money_format contains '{{ amount_with_comma_separator }}'
+          assign enableSuperScript = true
+        endif
+      endif
+    endunless
+  -%}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+    window.theme = window.theme || {};
+    theme.routes = {
+      home: "{{ routes.root_url }}",
+      collections: "{{ routes.collections_url }}",
+      cart: "{{ routes.cart_url | append: '.js' }}",
+      cartPage: "{{ routes.cart_url }}",
+      cartAdd: "{{ routes.cart_add_url | append: '.js' }}",
+      cartChange: "{{ routes.cart_change_url | append: '.js' }}",
+      search: "{{ routes.search_url }}"
+    };
+    theme.strings = {
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }},
+      inStockLabel: {{ 'products.product.in_stock_label' | t | json }},
+      stockLabel: {{ 'products.product.stock_label' | t: count: '[count]' | json }},
+      willNotShipUntil: {{ 'products.product.will_not_ship_until' | t: date: '[date]' | json }},
+      willBeInStockAfter: {{ 'products.product.will_be_in_stock_after' | t: date: '[date]' | json }},
+      waitingForStock: {{ 'products.product.waiting_for_stock' | t | json }},
+      savePrice: {{ 'products.general.save_html' | t: saved_amount: '[saved_amount]' | json }},
+      cartEmpty: {{ 'cart.general.empty' | t | json }},
+      cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }},
+      searchCollections: {{ 'general.search.collections' | t | json }},
+      searchPages: {{ 'general.search.pages' | t | json }},
+      searchArticles: {{ 'general.search.articles' | t | json }}
+    };
+    theme.settings = {
+      dynamicVariantsEnable: true,
+      cartType: {{ settings.cart_type | json }},
+      isCustomerTemplate: {% if request.page_type contains 'customers/' %}true{% else %}false{% endif %},
+      moneyFormat: {{ shop.money_format | json }},
+      saveType: {{ settings.product_save_type | json }},
+      productImageSize: {{ settings.product_grid_image_size | json }},
+      productImageCover: {{ settings.product_grid_image_fill }},
+      predictiveSearch: {{ settings.predictive_search_enabled }},
+      predictiveSearchType: {{ settings.search_type | json }},
+      superScriptSetting: {{ settings.superscript_decimals }},
+      superScriptPrice: {{ enableSuperScript }},
+      quickView: {{ settings.quick_shop_enable }},
+      quickAdd: {{ settings.quick_add_enable }},
+      themeName: 'Expanse',
+      themeVersion: "2.4.0"
+    };
+  </script>
+
+  {{ content_for_header }}
+
+  <script src="{{ 'vendor-scripts-v2.js' | asset_url | split: '?' | first }}" defer="defer"></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+  {%- if request.page_type contains 'customers/' -%}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <script async type="text/javascript" src="https://stofind.s3-us-west-2.amazonaws.com/customers/ibss-staging.myshopify.com/script.min.js"></script>
+
+  <!-- HC - Carousel added - 21 Mar '24 -->
+  {{ 'slick.min.js' | asset_url | script_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+  {% if template contains 'index' %}
+
+
+
+{% endif %}
+</head>
+
+        <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}" data-transitions="{{ settings.animate_page_transitions }}" data-button_style="{{ settings.button_style }}" data-edges="{{ settings.roundness }}" data-type_header_capitalize="{{ settings.type_header_capitalize }}" data-swatch_style="{{ settings.swatch_style }}" data-grid-style="{{ settings.product_grid_style }}">   
+<script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} {% if product.first_available_variant.price %}window.KlarnaThemeGlobals.data_purchase_amount = {{ product.first_available_variant.price }};{% endif %}window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+
+    {%- comment -%} <script async
+      src="https://na-library.klarnaservices.com/lib.js">
+    </script> {%- endcomment -%}
+{%- comment -%}  {%- endcomment -%}
+
+    {%- comment -%} <script>
+      window.KlarnaOnsiteService.push({ eventName: 'refresh-placements' });
+    </script> {%- endcomment -%}
+
+
+  {% if settings.animate_page_transitions %}
+    <script type="text/javascript">window.setTimeout(function() { document.body.className += " loaded"; }, 25);</script>
+  {% endif %}
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  <div id="PageContainer" class="page-container">
+    <div class="transition-body">
+      {%- section 'toolbar' -%}
+      {%- section 'header' -%}
+
+      <main class="main-content" id="MainContent">
+        {%- comment -%} [ST] Do not load flipbooks page if customer is not logged in {%- endcomment -%}
+        {% if template == "page.flipbooks" and shop.customer_accounts_enabled %}
+          {% if customer %}
+            {{ content_for_layout }}
+          {% else %}
+            <div class="restricted-accessmsg">Private content, please 
+              <a href="{{ routes.account_login_url }}">login</a> to show or 
+              <a href="{{ routes.account_url }}">create an account</a>.
+            </div>
+          {% endif %}
+        {% else %}
+          {{ content_for_layout }}
+        {% endif %}
+  {% capture stn_app %}{% include 'station-tabs' %}{% endcapture %}{% if stn_app contains 'Station.Apps' %}{{ stn_app }}{% endif %}
+        
+      {%- section 'footer-promotions' -%}
+      {%- section 'footer' -%}
+    </div>
+  </div>
+
+  {%- section 'newsletter-popup' -%}
+
+  {%- liquid
+    render 'video-modal'
+    render 'photoswipe-template'
+    if settings.quick_add_enable
+      render 'quick-add-modal'
+    endif
+  -%}
+  <div id="ProductModals"></div>
+  
+  {% unless template == "cart" %}
+  <script>
+    /* HC - remove products from ajax cart - 21 Feb 22 */
+    const removeProductFromCart = async (options) => {
+      let response = await fetch("/cart/change.js", options);
+      let data = await response.json();
+      return data;
+    }
+
+    document.addEventListener('CartDrawer:open', function(e) {
+      const removeButtons = [...document.querySelectorAll('.hc-cart-ajax--remove')];
+
+      removeButtons.forEach(item => {
+        item.addEventListener('click', function() {
+          removeProductFromCart({
+            method: "post",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'id': item.dataset.variantId, 'quantity': 0})
+          }).then(cart => {
+            document.dispatchEvent(new CustomEvent('ajaxProduct:added'))
+          }) 
+        })
+      })
+    })
+
+    document.addEventListener('cart:rebuild', function(e) {
+      const removeButtons = [...document.querySelectorAll('.hc-cart-ajax--remove')];
+
+      removeButtons.forEach(item => {
+        item.addEventListener('click', function() {
+          removeProductFromCart({
+            method: "post",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'id': item.dataset.variantId, 'quantity': 0})
+          }).then(cart => {
+            document.dispatchEvent(new CustomEvent('ajaxProduct:added'));  
+            // [ST] On Cart Remove Product       
+            //console.log("ST:XCART");   
+            var cartID = item.dataset.variantId;
+            var prodObj = document.querySelector(".prodqty");
+            if (prodObj != null) {
+              var varID = prodObj.getAttribute('data-varid');
+              var maxQTY = prodObj.getAttribute('max');
+              if (varID == cartID) {
+                prodObj.setAttribute('data-cartqty',0); 
+                var done = updateATCBtn();
+              }
+            }
+            // [ST] end
+          }) 
+        })
+      })
+    })
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const clearCart = document.querySelector('#hc-cart-ajax--clear');
+      clearCart.addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear your cart?')) {
+          fetch('/cart/clear.js', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(cart => {
+            // Verify the cart is empty by re-fetching it
+            theme.cart.getCart().then(function(updatedCart) {
+              if (updatedCart.item_count === 0) {
+                document.dispatchEvent(new CustomEvent('ajaxProduct:added'));
+                // Update quantity display if it exists
+                var prodObj = document.querySelector(".prodqty");
+                if (prodObj != null) {
+                  prodObj.setAttribute('data-cartqty', 0);
+                  var done = updateATCBtn();
+                }
+              } else {
+                console.error('Clear cart did not remove all items:', updatedCart);
+                // You could implement a retry here if needed
+              }
+            });
+          })
+          .catch(error => {
+            console.error("Error clearing cart:", error);
+          });
+        }
+      });
+    });
+  </script>
+  {% endunless %}
+                       {%- comment -%} <!-- Placement v2 -->
+                      <klarna-placement
+                        data-key="credit-promotion-auto-size"
+                        data-locale="en-CA"
+                        data-purchase-amount="1000"
+                      ></klarna-placement>
+                      <!-- end Placement --> {%- endcomment -%}
+<!--BeginCFFPersistentCartCart-->
+{% if customer %}
+<script>
+
+    window.cffCustomer = {
+        name: '{{customer.name}}',
+        email: '{{customer.email}}',
+        hasAccount: '{{customer.has_account}}',
+        id: '{{customer.id}}'
+    };
+
+
+</script>
+
+{% endif %}
+
+<script>
+    window.cffPCLiquidPlaced = true
+</script>
+
+<!--EndCFFPersistentCartCart-->
+
+<script>
+  // [ST] Start
+  updateQuantityLimit = function() {
+    var status = 0;
+    console.log("ST: Start of Quantity Limiter Function");
+    
+    var inputObj = document.querySelector(".prodqty");
+    if (inputObj != null) {
+      // Get VARIANT ID
+      var varId = inputObj.getAttribute('data-varid');
+      // Get MAX QTY
+      var maxQty = inputObj.getAttribute('max');
+      // Get CART QTY         
+      var cartQty = 0;
+      var url = ''.concat(theme.routes.cart, '?t=').concat(Date.now());
+      var cartContents = fetch(url, {
+        credentials: 'same-origin',
+        method: 'GET'
+      }).then(response => response.json())
+      .then(cart => {
+        for (var i = 0; i < cart.items.length; i++) {
+          if (cart.items[i].id == varId) {
+            cartQty = cart.items[i].quantity; 
+          }
+        }
+        inputObj.setAttribute('data-cartqty',cartQty); 
+        // Set QTY VAL and ATC
+        var done = updateATCBtn();
+      });
+    }
+    
+    //console.log("ST: End of Quantity Limiter Function");
+    status = 1;
+    return status;
+  }
+  // [ST] End
+</script>
+<script>
+  // [ST] Start
+  updateATCBtn = function() {
+    var done = 0;
+    //console.log("ST: Start of Update ATC Function");
+    var inputObj = document.querySelector(".prodqty");
+    if (inputObj != null) {
+      var maxQty = inputObj.getAttribute('max');
+      var cartQty = inputObj.getAttribute('data-cartqty');
+      // Set QTY VAL and ATC
+      var availQty = maxQty - cartQty;
+      inputObj.value = availQty ? 1 : 0; 
+
+      var cartBtn = document.querySelector('.add-to-cart');
+      if (inputObj.value == 0) {
+        cartBtn.classList.add("disabled");
+        cartBtn.disabled = true;
+      } else {
+        cartBtn.classList.remove("disabled");
+        cartBtn.disabled = false;
+      }
+    }
+    //console.log("ST: End of Update ATC Function");
+    done = 1;
+    return done;
+  }
+  // [ST] End
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% include 'swym-custom' %}
+{% include 'swym-ajax-cart' %}
+
+
+{% include 'swymSnippet' %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Detect the browser color scheme
+  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // Function to change the favicon based on the color scheme
+  function setFavicon() {
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+
+    // Check if the browser is in dark mode
+    if (isDarkMode) {
+      link.href = "https://cdn.shopify.com/s/files/1/0442/3516/1766/files/IB-LOGO-DARK.png?v=1718300640";
+    } else {
+      link.href = "https://cdn.shopify.com/s/files/1/0442/3516/1766/files/IB-LOGO-LIGHT.png?v=1718300639";
+    }
+  }
+
+  // Call the function when the DOM is fully loaded
+  setFavicon();
+});
+
+</script>
+</body>
+</html>

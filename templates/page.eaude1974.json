@@ -1,0 +1,233 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "advanced_content_U9cDwE": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_qMCb7j": {
+          "type": "liquid",
+          "settings": {
+            "code": "<!-- ⚡ Optimised Auto-Sliding Banner – drop-in snippet -->\n<div id=\"custom-slider-wrapper\">\n  <div id=\"custom-slider-section\">\n\n    <!-- Logo -->\n    <div class=\"logo-container\">\n      <img\n        src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/eau-logo.webp?v=1745526268\"\n        alt=\"EAU de 1974 Logo\"\n        class=\"brand-logo\"\n        width=\"200\"\n        height=\"60\">\n    </div>\n\n    <!-- Slides -->\n    <div class=\"custom-slides-container\">\n      <!-- Slide 1 (hero - eager) -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/eau-coffee.webp?v=1745448759&width=1200&quality=80\"\n          alt=\"EAU Coffee\"\n          width=\"1200\" height=\"800\"\n          fetchpriority=\"high\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 2 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/eaubillboard.webp?v=1745448759&width=1200&quality=80\"\n          alt=\"EAU Billboard\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 3 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/eauu-orange.webp?v=1745448759&width=1200&quality=80\"\n          alt=\"EAU Orange\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 4 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/eau-b.webp?v=1745448759&width=1200&quality=80\"\n          alt=\"EAU B\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 5 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/EAUDE1974_Campaign_24_CAPRI_1.webp?v=1745448748&width=1200&quality=80\"\n          alt=\"EAU Capri Campaign\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 6 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/EAUDE1974_Campaign_24_HAMPTONS_1.webp?v=1745448748&width=1200&quality=80\"\n          alt=\"EAU Hamptons Campaign\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 7 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/EAUDE1974_Campaign_24_SANTORINI_1.webp?v=1745448748&width=1200&quality=80\"\n          alt=\"EAU Santorini Campaign\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 8 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/hyaluronic.webp?v=1745448759&width=1200&quality=80\"\n          alt=\"EAU Hyaluronic\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n\n      <!-- Slide 9 -->\n      <div class=\"custom-slide\">\n        <img\n          src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/EAUDE1974_Campaign_24_HAMPTONS_3.webp?v=1745448748&width=1200&quality=80\"\n          alt=\"EAU Hamptons Lifestyle\"\n          width=\"1200\" height=\"800\"\n          loading=\"lazy\"\n          decoding=\"async\">\n      </div>\n    </div>\n\n    <!-- (no dot controls – keyboard & swipe still work) -->\n    <div class=\"slider-controls\"></div>\n  </div>\n\n  <!-- Call-to-Action -->\n  <div id=\"custom-explore-button-container\">\n    <a href=\"https://internationalbeauty.ca/collections/eau-de-1974\" id=\"custom-explore-button\">\n      Shop Now\n    </a>\n  </div>\n</div>\n\n<style>\n  #custom-slider-wrapper        {background:#FE6E35;padding:20px 0;border-bottom-left-radius:20px;border-bottom-right-radius:20px}\n  .logo-container               {text-align:center;margin-bottom:20px}\n  .brand-logo                   {max-width:200px;height:auto}\n  #custom-slider-section        {position:relative;overflow:hidden;max-width:1000px;margin:0 auto;padding:0 20px}\n  .custom-slides-container      {position:relative;width:100%;height:0;padding-bottom:66.67%;border-radius:15px;overflow:hidden}\n  .custom-slide                 {position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 1.2s ease;z-index:1}\n  .custom-slide.active          {opacity:1;z-index:2}\n  .custom-slide img             {width:100%;height:100%;object-fit:cover;display:block}\n  #custom-explore-button-container{text-align:center;margin:25px auto 10px;position:relative;z-index:5}\n  #custom-explore-button        {display:inline-block;padding:.75em 1.5em;background:#fff;color:#FE6E35;font-weight:bold;border-radius:2rem;text-decoration:none;transition:.3s all;box-shadow:0 2px 5px rgba(0,0,0,.1)}\n  #custom-explore-button:hover  {background:#F8F8F8;transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,.15)}\n  @media(max-width:768px)       {#custom-slider-section .slider-controls{bottom:10px}}\n</style>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', () => {\n  const slides   = document.querySelectorAll('.custom-slide');\n  const firstImg = slides[0].querySelector('img');\n\n  let currentIndex = 0;\n  const intervalMs = 2000;\n  let intervalId;\n\n  /* Start immediately if hero is cached, otherwise wait for load */\n  if (firstImg.complete) {\n    initSlider();\n  } else {\n    firstImg.addEventListener('load', initSlider, { once: true });\n  }\n\n  function initSlider() {\n    slides[0].classList.add('active');      // reveal first slide\n    resetInterval();                        // begin autoplay\n\n    /* pause / resume on hover */\n    const slider = document.getElementById('custom-slider-section');\n    slider.addEventListener('mouseenter', () => clearInterval(intervalId));\n    slider.addEventListener('mouseleave', resetInterval);\n\n    /* keyboard navigation */\n    document.addEventListener('keydown', e => {\n      if (e.key === 'ArrowRight') changeSlide(1);\n      if (e.key === 'ArrowLeft')  changeSlide(-1);\n    });\n\n    /* swipe navigation */\n    let startX = 0;\n    slider.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX, { passive:true });\n    slider.addEventListener('touchend',   e => {\n      const dx = e.changedTouches[0].screenX - startX;\n      if (Math.abs(dx) >= 50) changeSlide(dx > 0 ? -1 : 1);\n    }, { passive:true });\n  }\n\n  function changeSlide(step) {\n    slides[currentIndex].classList.remove('active');\n    currentIndex = (currentIndex + step + slides.length) % slides.length;\n    slides[currentIndex].classList.add('active');\n    resetInterval();\n  }\n\n  function resetInterval() {\n    clearInterval(intervalId);\n    intervalId = setInterval(() => changeSlide(1), intervalMs);\n  }\n});\n</script>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_qMCb7j"
+      ],
+      "settings": {
+        "full_width": true,
+        "space_around": false
+      }
+    },
+    "advanced_content_yDfqLA": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_w9UUCP": {
+          "type": "liquid",
+          "settings": {
+            "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>EAU de Perfume Collection</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: 'Arial', sans-serif;\n            width: 100%;\n            overflow-x: hidden;\n        }\n\n        .scent-section {\n            width: 100vw;\n            padding: 0;\n        }\n\n        .section-title {\n            text-align: center;\n            color: #e84e30;\n            font-size: 36px;\n            margin-bottom: 30px;\n            padding: 20px;\n            font-weight: 400;\n        }\n\n        .scent-container {\n            display: grid;\n            grid-template-columns: repeat(3, 1fr);\n            gap: 0;\n            width: 100vw;\n        }\n\n        .scent-item {\n            position: relative;\n            width: 100%;\n            aspect-ratio: 1/1;\n            overflow: hidden;\n        }\n\n        /* Multiple ripple circles */\n        .scent-item::before, \n        .scent-item::after {\n            content: '';\n            position: absolute;\n            top: 50%;\n            left: 50%;\n            width: 50px;\n            height: 50px;\n            border-radius: 50%;\n            background: rgba(255, 255, 255, 0.3);\n            transform: translate(-50%, -50%) scale(0);\n            animation: none;\n            pointer-events: none;\n            z-index: 1;\n        }\n        \n        .scent-item::after {\n            animation-delay: 0.3s;\n        }\n        \n        @keyframes ripple {\n            0% {\n                transform: translate(-50%, -50%) scale(0);\n                opacity: 0.5;\n            }\n            100% {\n                transform: translate(-50%, -50%) scale(6);\n                opacity: 0;\n            }\n        }\n        \n        .scent-item:hover::before,\n        .scent-item:hover::after {\n            animation: ripple 1.5s ease-out infinite;\n        }\n\n        .scent-link {\n            display: block;\n            height: 100%;\n            width: 100%;\n            text-decoration: none;\n            color: white;\n        }\n\n        .scent-image {\n            width: 100%;\n            height: 100%;\n            object-fit: cover;\n            display: block;\n            transition: transform 1.2s ease, filter 1.2s ease;\n            transform-origin: center;\n            filter: brightness(0.96);\n        }\n        \n        .scent-item:hover .scent-image {\n            transform: scale(1.3);\n            filter: brightness(1.1);\n        }\n\n        .scent-name {\n            position: absolute;\n            bottom: 30%;\n            left: 0;\n            width: 100%;\n            text-align: center;\n            color: white;\n            font-size: 28px;\n            font-weight: bold;\n            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n            z-index: 2;\n            transition: transform 0.5s ease;\n        }\n        \n        .scent-item:hover .scent-name {\n            transform: translateY(-5px);\n        }\n\n        /* Mobile styles */\n        @media (max-width: 768px) {\n            .scent-container {\n                grid-template-columns: 1fr;\n            }\n\n            .section-title {\n                font-size: 28px;\n                margin-bottom: 20px;\n            }\n        }\n    </style>\n</head>\n<body>\n    <section class=\"scent-section\">\n        <h2 class=\"section-title\">Explore our scents</h2>\n        <div class=\"scent-container\">\n            <div class=\"scent-item\">\n                <a href=\"https://internationalbeauty.ca/collections/eaude1974-eau-de-santorini\" class=\"scent-link\">\n                    <img class=\"scent-image\" src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/EAUde1974_productpagina_Hamptons_05-min-scaledsant.webp?v=1745441747\" alt=\"EAU de Santorini\">\n                    <h3 class=\"scent-name\">EAU de Santorini</h3>\n                </a>\n            </div>\n            <div class=\"scent-item\">\n                <a href=\"https://internationalbeauty.ca/collections/eaude1974-eau-de-hamptons\" class=\"scent-link\">\n                    <img class=\"scent-image\" src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/EAUde1974_productpagina_Hamptons_05-min-scaled.jpg?v=1745441147\" alt=\"EAU de Hamptons\">\n                    <h3 class=\"scent-name\">EAU de Hamptons</h3>\n                </a>\n            </div>\n            <div class=\"scent-item\">\n                <a href=\"https://internationalbeauty.ca/collections/eaude1974-eau-de-capri\" class=\"scent-link\">\n                    <img class=\"scent-image\" src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/EAUde1974_productpagina_Capri_04-min-scaled.jpg?v=1745441147\" alt=\"EAU de Capri\">\n                    <h3 class=\"scent-name\">EAU de Capri</h3>\n                </a>\n            </div>\n        </div>\n    </section>\n</body>\n</html>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_w9UUCP"
+      ],
+      "settings": {
+        "full_width": true,
+        "space_around": true
+      }
+    },
+    "advanced_content_ELPyFi": {
+      "type": "advanced-content",
+      "blocks": {
+        "image_RG3ixh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/EAUde1974_About-us_02-min-819x1024.webp",
+            "link": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "liquid_JaFUDL": {
+          "type": "liquid",
+          "settings": {
+            "code": "<!-- BEGIN EAUde1974 FAQ SECTION -->\n<section id=\"custom-eau1974-faq\">\n  <!-- FAQ Item 1 -->\n  <div class=\"custom-eau1974-item\">\n    <button type=\"button\" class=\"custom-eau1974-question\" aria-expanded=\"false\">\n      <span class=\"custom-eau1974-title\">What is EAUde1974 all about?</span>\n      <span class=\"custom-eau1974-icon\" aria-hidden=\"true\">▾</span>\n    </button>\n    <div class=\"custom-eau1974-answer\">\n      <p>EAUde1974 is more than just a brand; it’s a lifestyle. We’re all about turning the ordinary into extraordinary by transforming daily routines into joyful, sensorial experiences. From haircare and body care to lifestyle products that celebrate the senses, we’re here to enhance your life with a touch of magic, every single day.</p>\n    </div>\n  </div>\n\n  <!-- FAQ Item 2 -->\n  <div class=\"custom-eau1974-item\">\n    <button type=\"button\" class=\"custom-eau1974-question\" aria-expanded=\"false\">\n      <span class=\"custom-eau1974-title\">What makes EAUde1974 different from other brands?</span>\n      <span class=\"custom-eau1974-icon\" aria-hidden=\"true\">▾</span>\n    </button>\n    <div class=\"custom-eau1974-answer\">\n      <p>At EAUde1974, we believe in living life through every sense. We don’t just create products; we create experiences. Each item—from our mood-boosting fragrances to our eye-catching designs—is crafted to engage all your senses, making every moment with us a little more delightful, uplifting, and memorable.</p>\n    </div>\n  </div>\n\n  <!-- FAQ Item 3 -->\n  <div class=\"custom-eau1974-item\">\n    <button type=\"button\" class=\"custom-eau1974-question\" aria-expanded=\"false\">\n      <span class=\"custom-eau1974-title\">Where does the inspiration for EAUde1974 come from?</span>\n      <span class=\"custom-eau1974-icon\" aria-hidden=\"true\">▾</span>\n    </button>\n    <div class=\"custom-eau1974-answer\">\n      <p>Our inspiration flows from water, the source of all life. “Eau,” the French word for water, captures the vitality and purity that are at the heart of our philosophy. And with “de,” we blend fragrant oils and water into a harmonious symphony for the senses. Since 1974, our knowledge in hair cosmetics has shaped a vision of wellness that is luxurious, immersive, and holistic.</p>\n    </div>\n  </div>\n\n  <!-- FAQ Item 4 -->\n  <div class=\"custom-eau1974-item\">\n    <button type=\"button\" class=\"custom-eau1974-question\" aria-expanded=\"false\">\n      <span class=\"custom-eau1974-title\">What types of products does EAUde1974 offer?</span>\n      <span class=\"custom-eau1974-icon\" aria-hidden=\"true\">▾</span>\n    </button>\n    <div class=\"custom-eau1974-answer\">\n      <p>Our curated collection includes a range of haircare, body care, and lifestyle products. We are here to bring sensorial delight to every corner of your life. Stay tuned to what’s coming in our next launches.</p>\n    </div>\n  </div>\n\n  <!-- FAQ Item 5 -->\n  <div class=\"custom-eau1974-item\">\n    <button type=\"button\" class=\"custom-eau1974-question\" aria-expanded=\"false\">\n      <span class=\"custom-eau1974-title\">How does EAUde1974 make daily routines more enjoyable?</span>\n      <span class=\"custom-eau1974-icon\" aria-hidden=\"true\">▾</span>\n    </button>\n    <div class=\"custom-eau1974-answer\">\n      <p>We’re all about embracing every sensation! Our products are created to engage all your senses—from the feel of our luxurious textures to the captivating scents and stunning visuals. We transform everyday routines into sensory experiences that lift your mood and celebrate the small joys of life.</p>\n    </div>\n  </div>\n\n  <!-- FAQ Item 6 -->\n  <div class=\"custom-eau1974-item\">\n    <button type=\"button\" class=\"custom-eau1974-question\" aria-expanded=\"false\">\n      <span class=\"custom-eau1974-title\">Is EAUde1974 committed to sustainability?</span>\n      <span class=\"custom-eau1974-icon\" aria-hidden=\"true\">▾</span>\n    </button>\n    <div class=\"custom-eau1974-answer\">\n      <p>Absolutely! We care about our impact on the planet just as much as we care about enhancing your sensory experience. We prioritize sustainable practices, from ethically sourced ingredients to eco-friendly packaging. Because true luxury is being good to yourself and the earth.</p>\n    </div>\n  </div>\n</section>\n\n<style>\n  /* SECTION WRAPPER & VARIABLES */\n  #custom-eau1974-faq {\n    --custom-eau1974-accent: #e94e1b;    /* brand accent */\n    --custom-eau1974-bg: #fcfcfc;        /* section bg */\n    --custom-eau1974-card: #ffffff;      /* card bg */\n    --custom-eau1974-text: #333333;      /* headings */\n    --custom-eau1974-subtext: #555555;   /* body text */\n    background: var(--custom-eau1974-bg);\n    padding: 40px 20px;\n    max-width: 700px;\n    margin: 0 auto;\n  }\n\n  /* ITEM CARD */\n  #custom-eau1974-faq .custom-eau1974-item {\n    background: var(--custom-eau1974-card);\n    border-radius: 12px;\n    box-shadow: 0 4px 12px rgba(0,0,0,0.05);\n    overflow: hidden;\n    margin-bottom: 20px;\n  }\n\n  /* QUESTION BUTTON */\n  #custom-eau1974-faq .custom-eau1974-question {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    width: 100%;\n    padding: 20px;\n    background: none;\n    border: none;\n    cursor: pointer;\n  }\n  #custom-eau1974-faq .custom-eau1974-title {\n    font-size: 1.1rem;\n    font-weight: 600;\n    color: var(--custom-eau1974-text);\n  }\n  #custom-eau1974-faq .custom-eau1974-icon {\n    font-size: 1.2rem;\n    color: var(--custom-eau1974-accent);\n    transition: transform 0.3s ease;\n  }\n\n  /* ANSWER PANEL (hidden by default via max-height) */\n  #custom-eau1974-faq .custom-eau1974-answer {\n    max-height: 0;\n    overflow: hidden;\n    padding: 0 20px;\n    transition: max-height 0.4s ease, padding 0.4s ease;\n    color: var(--custom-eau1974-subtext);\n    font-size: 0.95rem;\n    line-height: 1.6;\n  }\n  /* OPEN STATE */\n  #custom-eau1974-faq .custom-eau1974-item.open .custom-eau1974-answer {\n    max-height: 500px; /* enough to show full content */\n    padding: 15px 20px 25px;\n  }\n  #custom-eau1974-faq .custom-eau1974-item.open .custom-eau1974-icon {\n    transform: rotate(180deg);\n  }\n\n  /* MOBILE */\n  @media (max-width: 600px) {\n    #custom-eau1974-faq {\n      padding: 20px 10px;\n    }\n    #custom-eau1974-faq .custom-eau1974-question {\n      padding: 16px;\n    }\n    #custom-eau1974-faq .custom-eau1974-title {\n      font-size: 1rem;\n    }\n    #custom-eau1974-faq .custom-eau1974-answer {\n      font-size: 0.9rem;\n      padding: 0 16px;\n    }\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    var items = document.querySelectorAll('#custom-eau1974-faq .custom-eau1974-item');\n    items.forEach(function(item) {\n      var btn = item.querySelector('.custom-eau1974-question');\n      btn.addEventListener('click', function() {\n        var isOpen = item.classList.contains('open');\n        // close all (optional: allow multiple open by removing this loop)\n        items.forEach(function(i){ i.classList.remove('open'); i.querySelector('.custom-eau1974-question').setAttribute('aria-expanded','false'); });\n        if (!isOpen) {\n          item.classList.add('open');\n          btn.setAttribute('aria-expanded','true');\n        }\n      });\n    });\n  });\n</script>\n<!-- END EAUde1974 FAQ SECTION -->",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "image_RG3ixh",
+        "liquid_JaFUDL"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": false
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "advanced_content_CMeix4": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_MQPeGG": {
+          "type": "liquid",
+          "settings": {
+            "code": "<!-- EAU de 1974 Reflecting Section - Start -->\n<div class=\"iwteau-reflecting-section\">\n  <div class=\"iwteau-reflecting-container\">\n    <div class=\"iwteau-reflecting-text iwteau-fade-element\">\n      <h2 class=\"iwteau-reflecting-title\">Reflecting Water's Timeless Influence</h2>\n      <p class=\"iwteau-reflecting-description\">\n        Inspired by the essence of water, EAUde1974 captures the essence of luxury and nature. The name \"EAU,\" derived from the French word for water, symbolizes vitality and purity—core principles that define our product philosophy. The addition of \"de\" in EAUde represents a harmonious blend of fragrant oils and water, crafting a sensory experience that delights the senses. With a rich heritage rooted in the hair cosmetics market since 1974, our brand combines decades of expertise with an unwavering commitment to excellence.\n      </p>\n      <a href=\"https://internationalbeauty.ca/collections/eau-de-1974\" class=\"iwteau-shop-button\">Shop Now</a>\n    </div>\n    <div class=\"iwteau-reflecting-image iwteau-fade-element\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0442/3516/1766/files/reflecting.jpg?v=1745591924\" alt=\"EAU de 1974\" class=\"iwteau-reflecting-img\">\n    </div>\n  </div>\n</div>\n\n<style>\n  /* Reflecting Section Styles */\n  .iwteau-reflecting-section {\n    width: 100%;\n    padding: 60px 20px;\n    box-sizing: border-box;\n    background-color: #ffffff; /* White background */\n  }\n\n  .iwteau-reflecting-container {\n    max-width: 1300px;\n    margin: 0 auto;\n    display: flex;\n    flex-direction: row;\n    gap: 40px;\n    align-items: center;\n  }\n\n  .iwteau-reflecting-text {\n    flex: 1;\n    padding-right: 20px;\n    opacity: 0; /* Start hidden for animation */\n    transform: translateY(30px); /* Increased offset for more noticeable animation */\n    transition: opacity 1.5s ease, transform 1.5s ease; /* Increased from 0.8s to 1.5s for slower effect */\n  }\n\n  .iwteau-reflecting-title {\n    font-family: serif;\n    font-size: 42px;\n    line-height: 1.2;\n    margin-bottom: 30px;\n    color: #fe6e35; /* Orange title color */\n    font-weight: 400;\n  }\n\n  .iwteau-reflecting-description {\n    font-size: 16px;\n    line-height: 1.6;\n    color: #333333; /* Dark text color */\n    margin: 0;\n    margin-bottom: 25px;\n  }\n\n  /* Shop Now Button Styles */\n  .iwteau-shop-button {\n    display: inline-block;\n    background-color: #fe6e35;\n    color: #ffffff !important; /* Forcing white text color */\n    padding: 12px 30px;\n    border-radius: 50px;\n    text-decoration: none !important; /* Forcing no underline */\n    font-size: 16px;\n    font-weight: 500;\n    transition: all 0.3s ease;\n    margin-top: 10px;\n    border: none;\n  }\n\n  /* Additional overrides to ensure white text and no underline */\n  .iwteau-shop-button:hover,\n  .iwteau-shop-button:focus,\n  .iwteau-shop-button:active,\n  .iwteau-shop-button:visited {\n    color: #ffffff !important;\n    text-decoration: none !important;\n    background-color: #e45c25;\n    transform: translateY(-2px);\n  }\n\n  .iwteau-reflecting-image {\n    flex: 1;\n    text-align: right;\n    opacity: 0; /* Start hidden for animation */\n    transform: translateY(30px); /* Increased offset for more noticeable animation */\n    transition: opacity 1.8s ease, transform 1.8s ease; /* Increased from 1s to 1.8s for slower effect */\n    transition-delay: 0.4s; /* Increased delay after text animation from 0.2s to 0.4s */\n  }\n\n  .iwteau-reflecting-img {\n    max-width: 100%;\n    height: auto;\n    border-radius: 8px;\n    display: block;\n    margin-left: auto;\n  }\n\n  /* Animation state for fade-in elements */\n  .iwteau-fade-element.iwteau-animate {\n    opacity: 1;\n    transform: translateY(0);\n  }\n\n  /* Responsive Styles */\n  @media screen and (max-width: 768px) {\n    .iwteau-reflecting-container {\n      flex-direction: column;\n      gap: 30px;\n    }\n\n    .iwteau-reflecting-text {\n      padding-right: 0;\n      order: 2; /* Text appears after image on mobile */\n      transition-delay: 0.4s; /* Text animates after image on mobile */\n    }\n\n    .iwteau-reflecting-image {\n      order: 1; /* Image appears first on mobile */\n      width: 100%;\n      transition-delay: 0s; /* Image animates first on mobile */\n    }\n\n    .iwteau-reflecting-title {\n      font-size: 32px;\n      margin-bottom: 20px;\n    }\n\n    .iwteau-reflecting-section {\n      padding: 40px 20px;\n    }\n  }\n  \n  @media screen and (max-width: 480px) {\n    .iwteau-reflecting-title {\n      font-size: 28px;\n    }\n    \n    .iwteau-reflecting-description {\n      font-size: 15px;\n    }\n    \n    .iwteau-shop-button {\n      padding: 10px 25px;\n      font-size: 15px;\n    }\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    // Function to set up fade animations\n    function iweauInitFadeAnimations() {\n      // Target the section container for better threshold detection\n      const sectionElement = document.querySelector('.iwteau-reflecting-section');\n      const fadeElements = document.querySelectorAll('.iwteau-fade-element');\n      \n      // Set up the Intersection Observer for the section\n      const observer = new IntersectionObserver((entries) => {\n        entries.forEach(entry => {\n          // If the section is 60% visible in the viewport\n          if (entry.isIntersecting) {\n            // Add the animation class to all fade elements inside with a delay\n            fadeElements.forEach((el, index) => {\n              // Stagger the animations more significantly\n              setTimeout(() => {\n                el.classList.add('iwteau-animate');\n              }, index * 300); // Increased delay between elements from 150ms to 300ms\n            });\n            \n            // Stop observing the section after animation is triggered\n            observer.unobserve(entry.target);\n          }\n        });\n      }, {\n        root: null, // viewport\n        rootMargin: '0px',\n        threshold: 0.6 // Trigger when 60% of the section is visible (increased from 0.5)\n      });\n\n      // Observe the section\n      observer.observe(sectionElement);\n    }\n\n    // Run the animation setup\n    iweauInitFadeAnimations();\n  });\n</script>\n\n<!-- \nCUSTOMIZATION NOTES:\n1. Replace image URL with your actual image path\n2. Adjust text content by editing the h2 and p elements\n3. Modify the button link URL as needed\n4. Adjust colors by changing the color values in the CSS\n5. Modify animation timing by changing transition duration values\n-->\n<!-- EAU de 1974 Reflecting Section - End -->",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_MQPeGG"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "full_width": true,
+        "space_around": false
+      }
+    },
+    "promo_slider_gFNGHT": {
+      "type": "promo-slider",
+      "blocks": {
+        "slide_Nyf6kU": {
+          "type": "slide",
+          "settings": {
+            "slide_type": "product",
+            "product": "giftset-hydrate-shape-eau-de-capri",
+            "image": "shopify://shop_images/eau_de_capri.jpg",
+            "heading": "",
+            "text": "<b>Pair for Hair Giftset</b><br>\n<br>\n<b>Hydrate & Shape 100ml:</b> Lightweight, silicone-free, vegan styling that hydrates, protects from heat, and adds body and shine.<br>\n<br>\n<b>EAU de Capri Hair Perfume 50ml:</b> Fresh green apple and lemon top notes with a fruity-floral heart and smoky finish—hydrates and scents hair all day.<br>",
+            "link": "",
+            "button_label": "Add to Cart",
+            "background_color": "#fe6e35",
+            "text_color": "#ffffff",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff",
+            "price_color": "#000000",
+            "sale_price_color": "#ffffff",
+            "compare_price_color": "#ffffff"
+          }
+        },
+        "slide_jLkm3x": {
+          "type": "slide",
+          "settings": {
+            "slide_type": "product",
+            "product": "giftset-hydrate-shape-eau-de-santorini",
+            "image": "shopify://shop_images/eau_de_santorini.jpg",
+            "heading": "",
+            "text": "<b>Pair for Hair Giftset</b><br>\n<br>\n<b>Hydrate & Shape 100ml:</b> Lightweight, silicone-free, vegan styling that hydrates, protects from heat, and boosts body and shine.<br>\n<br>\n<b>EAU de Santorini Hair Perfume 50ml:</b> Warm cardamom and bergamot top notes with spicy, floral, and woody undertones—hydrates and scents hair all day.<br>",
+            "link": "",
+            "button_label": "Add to Cart",
+            "background_color": "#00acd8",
+            "text_color": "#ffffff",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff",
+            "price_color": "#ffffff",
+            "sale_price_color": "#ffffff",
+            "compare_price_color": "#ffffff"
+          }
+        },
+        "slide_hbQL8d": {
+          "type": "slide",
+          "settings": {
+            "slide_type": "product",
+            "product": "giftset-hydrate-shape-eau-de-hamptons",
+            "image": "shopify://shop_images/eau_de_hamptons.jpg",
+            "heading": "",
+            "text": "<b>Pair for Hair Giftset</b><br>\n<br>\n<b>Hydrate & Shape 100ml:</b> Lightweight, silicone-free, vegan styling that hydrates, protects from heat, and boosts body and shine.<br>\n<br>\n<b>EAU de Hamptons Hair Perfume 50ml:</b> Bright lemon, bergamot, and juniper top notes with a floral heart and woody base—hydrates and scents hair all day.<br>",
+            "link": "",
+            "button_label": "Add to Cart",
+            "background_color": "#007864",
+            "text_color": "#ffffff",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff",
+            "price_color": "#ffffff",
+            "sale_price_color": "#ffffff",
+            "compare_price_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "slide_Nyf6kU",
+        "slide_jLkm3x",
+        "slide_hbQL8d"
+      ],
+      "name": "Promo Slider",
+      "settings": {
+        "section_heading": "Gift Sets",
+        "section_subheading": "",
+        "slides_to_show": "3",
+        "mobile_slides_to_show": "1",
+        "enable_autoplay": true,
+        "autoplay_speed": 15,
+        "enable_infinite_loop": true
+      }
+    },
+    "featured_collection_MGzUML": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "title": "EAU de Capri",
+        "home_featured_products": "eaude1974-eau-de-capri",
+        "count": 25,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "featured_collection_Y8HEVj": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "title": "Eau de Santorini",
+        "home_featured_products": "eaude1974-eau-de-santorini",
+        "count": 5,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "featured_collection_AdVVnP": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "title": "Eau de Hamptons",
+        "home_featured_products": "eaude1974-eau-de-hamptons",
+        "count": 5,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false
+      }
+    }
+  },
+  "order": [
+    "advanced_content_U9cDwE",
+    "advanced_content_yDfqLA",
+    "advanced_content_ELPyFi",
+    "main",
+    "advanced_content_CMeix4",
+    "promo_slider_gFNGHT",
+    "featured_collection_MGzUML",
+    "featured_collection_Y8HEVj",
+    "featured_collection_AdVVnP"
+  ]
+}

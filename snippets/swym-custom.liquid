@@ -1,0 +1,32 @@
+<script defer>
+  function swymCallbackFn(swat){
+     function swymAttachEvents(){
+      swat.initializeActionButtons("body");
+    }
+    document.addEventListener('quickview:loaded', function(e) {
+      console.log("Quickview Loaded!",e.detail.productId);
+      var variant_id = e.detail.variant.id;
+      var btn =  document.querySelector("#swym-quick-view-modal");
+      if(btn){
+        console.log("btn exists")
+        btn.setAttribute("data-variant-id", variant_id);
+      }
+      swymAttachEvents();
+    });
+    document.addEventListener('variant:change', function(event) {
+      console.log("Variant changed")
+      var variant_id = event.detail.variant.id;
+      var btn =  document.querySelector("#swym-quick-view-modal");
+      if(btn){
+        console.log("btn exists")
+        btn.setAttribute("data-variant-id", variant_id);
+      }
+      swymAttachEvents();
+    });
+  }
+
+  if(!window.SwymCallbacks){
+    window.SwymCallbacks = [];
+  }
+  window.SwymCallbacks.push(swymCallbackFn);
+</script>

@@ -1,0 +1,103 @@
+<div class="hc-slideshow-wrapper page-width">
+  {% if section.settings.title != blank %}
+  <h2>{{ section.settings.title }}</h2>
+  {% endif %}
+  <div class="hc-slider">
+    {% for block in section.blocks %}
+    {% assign hc_product = block.settings.hc_product %}
+    {% render 'hc-product-grid-item', product: hc_product, block: block %}
+    {% if settings.quick_shop_enable %}
+    {% render 'quick-shop-modal', product: hc_product %}
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Carousel",
+    "settings": [
+        {
+          "type": "checkbox",
+          "id": "hc_autoplay",
+          "label": "Autoplay"
+        },
+        {
+          "id": "hc_speed",
+          "type": "text",
+          "label": "Speed"
+        },
+        {
+          "id": "hc_delay",
+          "type": "text",
+          "label": "Delay"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured product carousel"
+      },
+      {
+        "type": "checkbox",
+        "id": "hc_description",
+        "label": "Enable Description"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "hc_product",
+            "label": "Product"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Carousel",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+  $(document).ready(function() {
+    var hc_autoplay = {{ section.settings.hc_autoplay }};
+    var hc_speed = {{ section.settings.hc_speed }};
+    var hc_delay = {{ section.settings.hc_delay }};
+
+    if(hc_autoplay == ''){
+      hc_autoplay = false;
+    }
+
+    $('.hc-slider').slick({
+      dots: false,
+      arrows: true,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      speed: hc_speed,
+      autoplay: hc_autoplay,
+      infinite: true,
+      autoplaySpeed: hc_delay,
+      prevArrow: '<div class="hc-arrow-left"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></div>',
+      nextArrow: '<div class="hc-arrow-right"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></div>',
+      responsive: [
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true
+          }
+        }
+     ]
+    });
+  });
+</script>

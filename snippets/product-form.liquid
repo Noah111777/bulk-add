@@ -1,0 +1,154 @@
+{%- form 'product', product, id: form_id, class: 'product-single__form' -%}
+  <input type="hidden" name="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+
+  {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+    <div class="product__policies rte">
+      {%- if shop.taxes_included -%}
+        {{ 'products.product.include_taxes' | t }}
+      {%- endif -%}
+      {%- if shop.shipping_policy.body != blank -%}
+        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- liquid
+    assign enable_dynamic_buttons = false
+    if show_dynamic_checkout and template != 'product.preorder'
+      assign enable_dynamic_buttons = true
+    endif
+  -%}
+
+  {% unless hideprice %}
+    {%- if enable_dynamic_buttons -%}
+      <div class="payment-buttons" id="product_buttons-{{ product.id }}">
+    {%- endif -%}
+
+    {%- liquid
+      assign default_text = 'products.product.add_to_cart' | t
+      assign button_text = 'products.product.add_to_cart' | t
+      if template == 'product.preorder'
+        assign default_text = 'products.product.preorder' | t
+        assign button_text = 'products.product.preorder' | t
+      endif
+      unless current_variant.available
+        assign button_text = 'products.product.sold_out' | t
+      endunless
+    -%}
+
+    <!-- Swym button on product pages -->
+    <div class="swym-wishlist-button-bar"></div>
+    <!-- Swym button on product pages -->
+
+    {% comment %} [ST] Removed since variant selector is not reliable on modal {% endcomment %}
+    {% comment %}
+      <div class="abcdswymmodal swym-button-bar swym-wishlist-button-bar">
+        <div class="swym-btn-container" data-position="default">
+          <button aria-label="Add to Wishlist" id="swym-quick-view" data-with-epi="true" class="swym-button swym-add-to-wishlist product_{{product.id}}" data-swaction="addToWishlist" data-product-id="{{product.id | json}}" data-variant-id="{{ product.variants[0].id }}" data-product-url="{{ shop.url }}{{ product.url }}"><span class="swym-wishlist-cta"></span></button>
+        </div>
+      </div>
+      <style>
+        .abcdswymmodal {
+          display: none;
+        }
+        .modal__inner .abcdswymmodal {
+          display: block;
+        }
+      </style>
+    {% endcomment %}
+
+    <button
+      {% if product.empty? %}
+        type="button"
+      {% else %}
+        type="submit"
+      {% endif %}
+      name="add"
+      data-add-to-cart
+      test-attribute
+      class="btn btn--full add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups == empty %} btn--secondary{% endif %}"
+      {% unless current_variant.available %}
+        disabled="disabled"
+      {% endunless %}
+    >
+      <span data-add-to-cart-text data-default-text="{{ default_text }}">
+        {{ button_text }}
+      </span>
+
+      {% comment %} SWYM start {% endcomment %}
+      {% comment %} {% render 'swym-product-view', product: product %} {% endcomment %}
+      {% comment %} <button class="swym-button swym-add-to-wishlist-view-product product_{{product.id}}" data-swaction="addToWishlist" data-product-id="{{product.id | json}}"></button> {% endcomment %}
+      {% comment %} SWYM end {% endcomment %}
+    </button>
+
+    {% comment %}
+      {% render 'swym-product-view', product: product %}
+      <button class="abcdswymbutton swym-button swym-add-to-wishlist-view-product product_{{product.id}}" data-swaction="addToWishlist" data-product-id="{{product.id | json}}"></button>
+    {% endcomment %}
+
+    {%- if enable_dynamic_buttons -%}
+      {{ form | payment_button }}
+    {%- endif -%}
+
+    {%- if enable_dynamic_buttons -%}
+      </div>
+    {%- endif -%}
+  {% endunless %}
+
+  {%- if show_dynamic_checkout -%}
+    <div class="shopify-payment-terms product__payment-terms">
+      {{ form | payment_terms }}
+    </div>
+  {%- endif -%}
+
+  <div class="create_acct inquire_link">
+    <a
+      href="/account/register"
+      class="btn btn--full btn--secondary"
+      id="create_acct-{{ product.id }}"
+      data-product-title="{{ product.title | escape }}"
+      style="display: none"
+    >
+      {{- 'customer.register.title' | t }}
+    </a>
+  </div>
+
+  <select name="id" data-product-select class="product-single__variants no-js">
+    {%- for variant in product.variants -%}
+      {%- if variant.available -%}
+        <option
+          {% if variant == product.selected_or_first_available_variant %}
+            selected="selected"
+          {% endif %}
+          value="{{ variant.id }}"
+        >
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {%- else -%}
+        <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+      {%- endif -%}
+    {%- endfor -%}
+  </select>
+
+  <textarea data-variant-json class="hide" aria-hidden="true" aria-label="Product JSON">
+    {{ product.variants | json }}
+  </textarea>
+  {%- if product.options.size > 1 -%}
+    <textarea data-current-variant-json class="hide" aria-hidden="true" aria-label="Variant JSON">
+      {{ current_variant | json }}
+    </textarea>
+  {%- endif -%}
+{%- endform -%}
+
+{% if hideprice %}
+  <style>
+    .swym-wishlist-button-bar {
+      display: none !important;
+    }
+  </style>
+{% endif %}
+<!-- BEGIN SPT.WISHLIST -->
+
+{% comment %} <div class="spt-wishlist-button__wrapper"><button class="spt-wishlist-button"><span class="spt-wishlist-element spt-std spt-icon spt-icon-heart-empty" data-spt-params="{productId:{{product.id}},urlName:'{{product.handle}}'}"></span></button></div> {% endcomment %}
+
+<!-- END SPT.WISHLIST -->

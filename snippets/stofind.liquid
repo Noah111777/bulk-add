@@ -1,0 +1,23 @@
+{% if product.variants.size > 1 %} 
+  <script type="text/javascript" id="stofind">
+    var stofindProductOptions = {
+        type: 'div',
+        props: { class: 'sto-product-variants'},
+        children: [ {% for option in product.options_with_values %}
+          { type: 'label',
+            props: { for: 'option-selector-{{ forloop.index0 }}' },
+            value: '{{ option.name }}'
+          },
+          { type: 'select',
+            props: { class: 'sto-product-options-select', id: 'option-selector-{{ forloop.index0 }}' },
+            children: [ {% for value in option.values %}
+              { type: 'option',
+                props: { value: '{{ value | escape }}', {% if option.selected_value == value %}selected: 'selected'{% endif %} },
+                value: '{{ value | escape }}'
+              },
+            {% endfor %}]
+          },
+        {% endfor %}]
+    };
+  </script>
+{% endif %}

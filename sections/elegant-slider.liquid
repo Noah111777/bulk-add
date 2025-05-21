@@ -1,0 +1,506 @@
+{% schema %}
+{
+  "name": "Elegant Slider",
+  "tag": "section",
+  "class": "elegant-slider-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Elegant Slider"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Large"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Slide Title",
+          "default": "Slide Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Slide Content",
+          "default": "<p>Your slide content here.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (Optional)"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elegant Slider",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .elegant-slider-section {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+
+  .elegant-slider__container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 100px; /* Increased padding for arrow space */
+  }
+
+  .elegant-slider__heading {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+
+  .elegant-slider__wrapper {
+    position: relative;
+    overflow: visible; /* Changed from hidden to allow arrows to be visible outside */
+  }
+
+  .elegant-slider__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scroll-behavior: smooth;
+    padding-bottom: 20px; /* Space for potential scrollbar */
+    margin: 0 10px; /* Add margin to prevent slide content from overlapping with arrows */
+  }
+
+  .elegant-slider__track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .elegant-slider__slide {
+    flex: 0 0 calc(50% - 20px);
+    scroll-snap-align: start;
+    margin-right: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .elegant-slider__slide:hover {
+    transform: translateY(-5px);
+  }
+
+  .elegant-slider__image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .elegant-slider__title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .elegant-slider__content {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: {{ section.settings.text_color }};
+  }
+
+  .elegant-slider__button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: {{ section.settings.text_color }};
+    color: {{ section.settings.background_color }};
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    margin-top: auto;
+    align-self: flex-start;
+    transition: opacity 0.2s ease;
+  }
+
+  .elegant-slider__button:hover {
+    opacity: 0.9;
+  }
+
+  .elegant-slider__controls {
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .elegant-slider__controls--desktop {
+    position: absolute;
+    width: calc(100% + 160px); /* Extend farther beyond the container */
+    top: 50%;
+    left: -80px; /* Pull back more to align with container edges */
+    transform: translateY(-50%);
+    z-index: 20; /* Ensure arrows are on top */
+  }
+  
+  .elegant-slider__controls--mobile {
+    display: none; /* Hidden by default, shown on mobile */
+    margin-top: 25px;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .elegant-slider__arrow {
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Increased shadow */
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    z-index: 30;
+  }
+
+  .elegant-slider__arrow:hover {
+    transform: scale(1.1);
+    background-color: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  }
+  
+  .elegant-slider__arrow.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .elegant-slider__arrow:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .elegant-slider__arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .elegant-slider__arrow--prev {
+    margin-left: 0;
+  }
+
+  .elegant-slider__arrow--next {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .elegant-slider__container {
+      padding: 0 20px; /* Reduced side padding on mobile */
+    }
+    
+    .elegant-slider__slide {
+      flex: 0 0 calc(100% - 20px);
+    }
+
+    .elegant-slider__controls--desktop {
+      display: none; /* Hide desktop controls on mobile */
+    }
+    
+    .elegant-slider__controls--mobile {
+      display: flex; /* Show mobile controls */
+    }
+
+    .elegant-slider__arrow {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>
+
+<div class="elegant-slider-section" id="section-{{ section.id }}">
+  <div class="elegant-slider__container">
+    {% if section.settings.heading != blank %}
+      <{{ section.settings.heading_size }} class="elegant-slider__heading">
+        {{ section.settings.heading }}
+      </{{ section.settings.heading_size }}>
+    {% endif %}
+
+    <div class="elegant-slider__wrapper">
+      <div class="elegant-slider__controls elegant-slider__controls--desktop">
+        <button class="elegant-slider__arrow elegant-slider__arrow--prev" aria-label="Previous slide" data-direction="prev">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="elegant-slider__arrow elegant-slider__arrow--next" aria-label="Next slide" data-direction="next">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="elegant-slider__track" id="slider-track-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'slide' %}
+            <div class="elegant-slider__slide" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                <img 
+                  src="{{ block.settings.image | img_url: 'medium' }}" 
+                  alt="{{ block.settings.title | escape }}"
+                  class="elegant-slider__image"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <h3 class="elegant-slider__title">{{ block.settings.title }}</h3>
+              {% endif %}
+
+              {% if block.settings.content != blank %}
+                <div class="elegant-slider__content">{{ block.settings.content }}</div>
+              {% endif %}
+
+              {% if block.settings.button_link != blank and block.settings.button_text != blank %}
+                <a href="{{ block.settings.button_link }}" class="elegant-slider__button">
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Mobile controls (will be hidden on desktop) -->
+      <div class="elegant-slider__controls elegant-slider__controls--mobile">
+        <button class="elegant-slider__arrow elegant-slider__arrow--prev" aria-label="Previous slide" data-direction="prev">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="elegant-slider__arrow elegant-slider__arrow--next" aria-label="Next slide" data-direction="next">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all the required elements
+    const sliderSection = document.getElementById('section-{{ section.id }}');
+    const sliderTrack = document.getElementById('slider-track-{{ section.id }}');
+    const slides = sliderTrack.querySelectorAll('.elegant-slider__slide');
+    const prevButtons = sliderSection.querySelectorAll('.elegant-slider__arrow--prev');
+    const nextButtons = sliderSection.querySelectorAll('.elegant-slider__arrow--next');
+    
+    // If no slides, exit
+    if (slides.length === 0) return;
+    
+    // Slider state
+    let currentPosition = 0;
+    let slideWidth = 0;
+    let totalSlides = slides.length;
+    let slidesPerView = 0;
+    
+    // Get number of slides visible based on screen width
+    function getSlidesPerView() {
+      return window.innerWidth <= 768 ? 1 : 2;
+    }
+    
+    // Initialize and update the slider measurements
+    function initSlider() {
+      slideWidth = slides[0].offsetWidth + parseInt(getComputedStyle(slides[0]).marginRight);
+      slidesPerView = getSlidesPerView();
+      
+      // Reset position to valid value after resize
+      const maxPosition = Math.max(0, totalSlides - slidesPerView);
+      if (currentPosition > maxPosition) {
+        currentPosition = maxPosition;
+        scrollToPosition(currentPosition);
+      }
+      
+      updateButtonStates();
+    }
+    
+    // Scroll to a specific position
+    function scrollToPosition(position) {
+      if (slideWidth === 0) return;
+      
+      sliderTrack.scrollTo({
+        left: position * slideWidth,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Move to previous slide
+    function goToPrevSlide() {
+      if (currentPosition > 0) {
+        currentPosition--;
+        scrollToPosition(currentPosition);
+        updateButtonStates();
+      }
+    }
+    
+    // Move to next slide
+    function goToNextSlide() {
+      const maxPosition = Math.max(0, totalSlides - slidesPerView);
+      if (currentPosition < maxPosition) {
+        currentPosition++;
+        scrollToPosition(currentPosition);
+        updateButtonStates();
+      }
+    }
+    
+    // Update the disabled state of navigation buttons
+    function updateButtonStates() {
+      const maxPosition = Math.max(0, totalSlides - slidesPerView);
+      const atStart = currentPosition <= 0;
+      const atEnd = currentPosition >= maxPosition;
+      
+      // Update previous buttons
+      prevButtons.forEach(button => {
+        button.disabled = atStart;
+        button.classList.toggle('disabled', atStart);
+      });
+      
+      // Update next buttons
+      nextButtons.forEach(button => {
+        button.disabled = atEnd;
+        button.classList.toggle('disabled', atEnd);
+      });
+    }
+    
+    // Handle scroll events to update current position
+    function handleScroll() {
+      if (slideWidth === 0) return;
+      
+      // Use setTimeout to wait for scrolling to finish
+      clearTimeout(sliderTrack.scrollTimeout);
+      sliderTrack.scrollTimeout = setTimeout(() => {
+        // Calculate position based on scroll
+        currentPosition = Math.round(sliderTrack.scrollLeft / slideWidth);
+        updateButtonStates();
+      }, 100);
+    }
+    
+    // Add click event listeners to all buttons
+    function setupButtonListeners() {
+      prevButtons.forEach(button => {
+        button.addEventListener('click', goToPrevSlide);
+      });
+      
+      nextButtons.forEach(button => {
+        button.addEventListener('click', goToNextSlide);
+      });
+    }
+    
+    // Initialize the slider
+    initSlider();
+    setupButtonListeners();
+    
+    // Add scroll event listener
+    sliderTrack.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      clearTimeout(window.resizeTimer);
+      window.resizeTimer = setTimeout(initSlider, 250);
+    });
+    
+    // Initial position setup
+    scrollToPosition(0);
+    updateButtonStates();
+  });
+</script>

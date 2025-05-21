@@ -1,0 +1,23 @@
+<script defer>
+  function swymCallbackFn(swat){
+   /* For Swym-AJAX Cart trigger */
+     swat.evtLayer.addEventListener(swat.JSEvents.UIAddedToCart, function(e){
+     var data = {
+       'items': [{
+        'id': e.detail.d.productData.id,
+        'quantity': 1
+        }]
+      };
+       var product = data;
+        document.dispatchEvent(new CustomEvent('ajaxProduct:added', {
+          detail: {
+            product: product
+          }
+        }));
+     });
+  }
+  if(!window.SwymCallbacks){
+    window.SwymCallbacks = [];
+  }
+  window.SwymCallbacks.push(swymCallbackFn);
+</script>

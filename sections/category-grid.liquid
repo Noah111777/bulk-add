@@ -1,0 +1,296 @@
+{% schema %}  
+{
+  "name": "Category Grid Navigation",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation Categories"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (optional)"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1800,
+      "step": 100,
+      "unit": "px",
+      "label": "Max width on desktop",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Button corner radius",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Scroll Settings"
+    },
+    {
+      "type": "range",
+      "id": "scroll_position_desktop",
+      "min": -600,
+      "max": 600,
+      "step": 15,
+      "unit": "px",
+      "label": "Desktop scroll position adjustment",
+      "info": "Negative values scroll higher up, positive values scroll further down",
+      "default": -195
+    },
+    {
+      "type": "range",
+      "id": "scroll_position_mobile",
+      "min": -600,
+      "max": 600,
+      "step": 15,
+      "unit": "px",
+      "label": "Mobile scroll position adjustment",
+      "info": "Negative values scroll higher up, positive values scroll further down",
+      "default": -150
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "section_id",
+          "label": "Section ID to scroll to",
+          "default": "section-1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Grid Navigation",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="category-grid-container">
+  <div class="category-grid-inner" style="max-width: {{ section.settings.max_width }}px;">
+    {% if section.settings.heading != blank %}
+      <div class="category-heading">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+    
+    <div class="category-grid">
+      {% for block in section.blocks %}
+        <button class="category-pill" data-section="{{ block.settings.section_id }}">
+          {{ block.settings.category_name }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+.category-grid-container {
+  position: relative;
+  background: white;
+  padding: 28px 0;
+  width: 100%;
+  z-index: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.category-grid-inner {
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 18px;
+}
+
+.category-heading {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.category-heading h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.category-pill {
+  background: white;
+  border: 1px solid #555555;
+  padding: 14px 28px;
+  border-radius: {{ section.settings.button_radius }}px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+  user-select: none;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+  min-width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-pill:hover {
+  background: #000;
+  color: white;
+}
+
+.category-pill.active {
+  background: #000;
+  color: white;
+  border-color: #555555;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .category-grid-container {
+    padding: 23px 0;
+  }
+  
+  .category-grid-inner {
+    padding: 0 10px;
+  }
+  
+  .category-grid {
+    gap: 10px;
+  }
+  
+  .category-pill {
+    padding: 10px 16px;
+    font-size: 14px;
+    flex-grow: 1;
+    max-width: calc(50% - 5px);  /* Allow 2 buttons per row with 10px gap */
+    min-height: 44px;
+    hyphens: auto;
+    word-break: break-word;
+    line-height: 1.2;
+  }
+  
+  .category-heading {
+    padding: 0;
+    margin-bottom: 15px;
+  }
+  
+  .category-heading h2 {
+    font-size: 20px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const categoryPills = document.querySelectorAll('.category-pill');
+  
+  // Category pill click handler
+  categoryPills.forEach(pill => {
+    pill.addEventListener('click', function() {
+      // Remove active class from all pills
+      categoryPills.forEach(p => p.classList.remove('active'));
+      
+      // Add active class to clicked pill
+      this.classList.add('active');
+      
+      // Get the target section
+      const targetSection = document.getElementById(this.dataset.section);
+      
+      if (targetSection) {
+        const headerOffset = document.querySelector('.category-grid-container').offsetHeight;
+        
+        // Determine if we're on mobile or desktop
+        const isMobile = window.innerWidth <= 768;
+        
+        // Use appropriate scroll position adjustment based on screen size
+        // Positive values scroll further down, negative values scroll higher up
+        const scrollAdjustment = isMobile 
+          ? {{ section.settings.scroll_position_mobile }} 
+          : {{ section.settings.scroll_position_desktop }};
+          
+        const elementPosition = targetSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset + scrollAdjustment;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Highlight active section on scroll
+  let timeout;
+  window.addEventListener('scroll', function() {
+    if (timeout) {
+      window.cancelAnimationFrame(timeout);
+    }
+    
+    timeout = window.requestAnimationFrame(function() {
+      const sections = Array.from(categoryPills).map(pill => 
+        document.getElementById(pill.dataset.section)
+      ).filter(Boolean);
+      
+      const headerHeight = document.querySelector('.category-grid-container').offsetHeight;
+      
+      // Find the current section
+      let currentSection = sections.find(section => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= headerHeight + 50 && rect.bottom > headerHeight;
+      });
+      
+      // Update active pill
+      categoryPills.forEach(pill => {
+        if (currentSection && pill.dataset.section === currentSection.id) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+    });
+  });
+});
+</script>

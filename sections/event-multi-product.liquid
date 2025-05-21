@@ -1,0 +1,1255 @@
+{% schema %}
+{
+  "name": "Event Products",
+  "tag": "section",
+  "class": "event-products-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Event Options"
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 0,
+      "info": "Controls the space above the section content"
+    },
+    {
+      "type": "select",
+      "id": "products_per_row",
+      "label": "Products per row (Desktop)",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Section Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Section Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Product Card"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_shadow_color",
+      "label": "Card Shadow Color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "header",
+      "content": "Product Content"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "product_description_color",
+      "label": "Product Description Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Sale Price Color",
+      "default": "#e4424b"
+    },
+    {
+      "type": "header",
+      "content": "Variant Pills"
+    },
+    {
+      "type": "color",
+      "id": "pill_bg_color",
+      "label": "Pill Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "pill_text_color",
+      "label": "Pill Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "pill_border_color",
+      "label": "Pill Border Color",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "pill_selected_bg_color",
+      "label": "Selected Pill Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "pill_selected_text_color",
+      "label": "Selected Pill Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Quantity Selector"
+    },
+    {
+      "type": "color",
+      "id": "quantity_container_bg_color",
+      "label": "Quantity Container Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "quantity_border_color",
+      "label": "Quantity Border Color",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "quantity_button_bg_color",
+      "label": "Button Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "quantity_button_text_color",
+      "label": "Button Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "quantity_input_bg_color",
+      "label": "Input Field Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "quantity_input_text_color",
+      "label": "Input Field Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_disabled_color",
+      "label": "Button Disabled Color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Form Labels"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Form Label Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Product Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image_desktop",
+          "label": "Show Image on Desktop",
+          "default": true,
+          "info": "Controls image visibility on desktop devices"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image_mobile",
+          "label": "Show Image on Mobile",
+          "default": true,
+          "info": "Controls image visibility on mobile devices"
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "label": "Image Aspect Ratio",
+          "options": [
+            {
+              "value": "square",
+              "label": "Square (1:1)"
+            },
+            {
+              "value": "portrait",
+              "label": "Portrait (3:4)"
+            },
+            {
+              "value": "landscape",
+              "label": "Landscape (4:3)"
+            }
+          ],
+          "default": "square"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title (Optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom Description (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "Show Price",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_quantity",
+          "label": "Show Quantity Selector",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_variant_labels",
+          "label": "Show Variant Labels",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Add to Cart Button Text",
+          "default": "Add to Cart"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Event Products",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .event-products-section {
+    padding-bottom: 40px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    /* Fix for whitespace at top */
+    margin-top: -1px;
+    border-top: 1px solid transparent;
+  }
+
+  .event-products-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    /* Color will be set inline via liquid */
+  }
+
+  .event-products-grid {
+    display: grid;
+    gap: 30px;
+  }
+
+  .products-per-row-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products-per-row-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .event-product-card {
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Background and shadow will be set inline via liquid */
+  }
+
+  .event-product-card__inner {
+    padding: 25px;
+  }
+  
+  .product-image-container {
+    margin-bottom: 20px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+    display: block;
+  }
+  
+  .image-ratio-square {
+    aspect-ratio: 1/1;
+  }
+  
+  .image-ratio-portrait {
+    aspect-ratio: 3/4;
+  }
+  
+  .image-ratio-landscape {
+    aspect-ratio: 4/3;
+  }
+  
+  .product-featured-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Responsive image visibility controls */
+  @media screen and (min-width: 768px) {
+    .hide-on-desktop {
+      display: none !important;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .hide-on-mobile {
+      display: none !important;
+    }
+  }
+
+  .product-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+    /* Color will be set inline via liquid */
+  }
+
+  .product-description {
+    margin-bottom: 15px;
+    font-size: 14px;
+    /* Color will be set inline via liquid */
+  }
+
+  .product-price {
+    margin-bottom: 20px;
+    font-weight: bold;
+    /* Color will be set inline via liquid */
+  }
+
+  .price-item--sale {
+    margin-left: 10px;
+    /* Color will be set inline via liquid */
+  }
+
+  /* Variant Pills Styles */
+  .product-form__input {
+    margin-bottom: 15px;
+  }
+
+  .form__label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    /* Color will be set inline via liquid */
+  }
+
+  .pill-variants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .variant-pill {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    /* Background, border and text color will be set inline via liquid */
+  }
+
+  .variant-pill:hover {
+    opacity: 0.9;
+  }
+
+  .variant-pill.selected {
+    /* Background and text color for selected state will be set inline via liquid */
+  }
+
+  .quantity {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
+    width: fit-content;
+    margin-bottom: 20px;
+    /* Background and border color will be set inline via liquid */
+  }
+
+  .quantity__button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    /* Background and text color will be set inline via liquid */
+  }
+
+  .quantity__button:hover {
+    opacity: 0.8;
+  }
+
+  .quantity__button:active {
+    opacity: 0.7;
+  }
+
+  .quantity__input {
+    width: 45px;
+    height: 36px;
+    border: none;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    /* Background and text color will be set inline via liquid */
+    -moz-appearance: textfield;
+  }
+
+  .quantity__input::-webkit-outer-spin-button,
+  .quantity__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .quantity__input:focus {
+    outline: none;
+  }
+
+  .product-form__submit {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    /* Background and text color will be set inline via liquid */
+  }
+
+  .product-form__submit:hover {
+    opacity: 0.9;
+  }
+
+  .product-form__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    /* Disabled color is set inline */
+  }
+  
+  /* Cart notification styles */
+  .cart-notification {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  .cart-notification--success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .cart-notification--error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  /* Mobile styles */
+  @media screen and (max-width: 767px) {
+    .event-products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .event-products-section {
+      padding-bottom: 20px;
+    }
+
+    .event-product-card__inner {
+      padding: 20px;
+    }
+    
+    .pill-variants {
+      gap: 6px;
+    }
+    
+    .variant-pill {
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+  }
+</style>
+
+<div class="event-products-section" style="background-color: {{ section.settings.section_bg_color }}; padding-top: {{ section.settings.top_padding }}px;">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="section-title" style="color: {{ section.settings.heading_color }};">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="event-products-grid products-per-row-{{ section.settings.products_per_row }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'product' and block.settings.product != blank %}
+          {% assign product = all_products[block.settings.product] %}
+          
+          <div class="event-product-card" 
+               style="background-color: {{ section.settings.card_bg_color }}; box-shadow: 0 4px 15px {{ section.settings.card_shadow_color }};"
+               {{ block.shopify_attributes }}>
+            <div class="event-product-card__inner">
+              
+              {% comment %} Product Image Container - Always render but control visibility with CSS {% endcomment %}
+              <div class="product-image-container image-ratio-{{ block.settings.image_ratio }} {% if block.settings.show_image_desktop != true %}hide-on-desktop{% endif %} {% if block.settings.show_image_mobile != true %}hide-on-mobile{% endif %}">
+                <img 
+                  id="ProductImage-{{ section.id }}-{{ block.id }}"
+                  class="product-featured-image"
+                  src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  data-product-id="{{ product.id }}"
+                  data-section-id="{{ section.id }}"
+                  data-block-id="{{ block.id }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              </div>
+              
+              {% comment %} Product Title {% endcomment %}
+              <h3 class="product-title" style="color: {{ section.settings.product_title_color }};">
+                {% if block.settings.custom_title != blank %}
+                  {{ block.settings.custom_title }}
+                {% else %}
+                  {{ product.title }}
+                {% endif %}
+              </h3>
+
+              {% comment %} Product Description {% endcomment %}
+              {% if block.settings.custom_description != blank %}
+                <div class="product-description" style="color: {{ section.settings.product_description_color }};">
+                  {{ block.settings.custom_description }}
+                </div>
+              {% endif %}
+
+              {% comment %} Product Price {% endcomment %}
+              {% if block.settings.show_price %}
+                <div class="product-price" id="price-{{ section.id }}-{{ block.id }}">
+                  <span class="price-item price-item--regular" style="color: {{ section.settings.price_color }};">
+                    {{ product.price | money }}
+                  </span>
+                  
+                  {% if product.compare_at_price > product.price %}
+                    <span class="price-item price-item--sale" style="color: {{ section.settings.sale_price_color }};">
+                      <s>{{ product.compare_at_price | money }}</s>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% comment %} Product Form {% endcomment %}
+              {%- assign product_form_id = 'event-product-form-' | append: product.id | append: '-' | append: block.id -%}
+              
+              <product-form class="product-form">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                
+                {% comment %} Variant Selector Pills {% endcomment %}
+                {%- unless product.has_only_default_variant -%}
+                  {% comment %} Hidden JSON for variants with images {% endcomment %}
+                  <script type="application/json" id="ProductJson-{{ product.id }}">
+                    {
+                      "id": {{ product.id | json }},
+                      "title": {{ product.title | json }},
+                      "handle": {{ product.handle | json }},
+                      "variants": [
+                        {% for variant in product.variants %}
+                        {
+                          "id": {{ variant.id | json }},
+                          "title": {{ variant.title | json }},
+                          "option1": {{ variant.option1 | json }},
+                          "option2": {{ variant.option2 | json }},
+                          "option3": {{ variant.option3 | json }},
+                          "options": {{ variant.options | json }},
+                          "available": {{ variant.available | json }},
+                          "price": {{ variant.price | json }},
+                          "compare_at_price": {{ variant.compare_at_price | json }},
+                          "featured_image": {% if variant.image %}{"id": {{ variant.image.id | json }}, "src": {{ variant.image.src | json }}, "alt": {{ variant.image.alt | json }}}{% else %}null{% endif %}
+                        }{% unless forloop.last %},{% endunless %}
+                        {% endfor %}
+                      ]
+                    }
+                  </script>
+                  
+                  <variant-selects class="no-js-hidden" 
+                                   data-product-id="{{ product.id }}" 
+                                   data-section-id="{{ section.id }}" 
+                                   data-block-id="{{ block.id }}"
+                                   data-pill-bg="{{ section.settings.pill_bg_color }}"
+                                   data-pill-border="{{ section.settings.pill_border_color }}"
+                                   data-pill-text="{{ section.settings.pill_text_color }}"
+                                   data-pill-selected-bg="{{ section.settings.pill_selected_bg_color }}"
+                                   data-pill-selected-text="{{ section.settings.pill_selected_text_color }}">
+                    {%- for option in product.options_with_values -%}
+                      <div class="product-form__input">
+                        {% if block.settings.show_variant_labels %}
+                          <label class="form__label" for="Option-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}" style="color: {{ section.settings.label_color }};">
+                            {{ option.name }}
+                          </label>
+                        {% endif %}
+
+                        <div class="pill-variants" data-option-index="{{ forloop.index0 }}">
+                          {%- for value in option.values -%}
+                            <button 
+                              type="button"
+                              class="variant-pill{% if option.selected_value == value %} selected{% endif %}" 
+                              data-value="{{ value | escape }}"
+                              {% if option.selected_value == value %}aria-selected="true"{% endif %}
+                              style="background-color: {{ section.settings.pill_bg_color }}; 
+                                     color: {{ section.settings.pill_text_color }}; 
+                                     border: 1px solid {{ section.settings.pill_border_color }}; 
+                                     {% if option.selected_value == value %}
+                                       background-color: {{ section.settings.pill_selected_bg_color }}; 
+                                       color: {{ section.settings.pill_selected_text_color }}; 
+                                       border-color: {{ section.settings.pill_selected_bg_color }};
+                                     {% endif %}"
+                            >
+                              {{ value }}
+                            </button>
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    {%- endfor -%}
+                  </variant-selects>
+                {%- endunless -%}
+
+                {% comment %} Quantity Selector {% endcomment %}
+                {% if block.settings.show_quantity %}
+                  <div class="product-form__input product-form__quantity">
+                    <label class="form__label" for="Quantity-{{ section.id }}-{{ block.id }}" style="color: {{ section.settings.label_color }};">
+                      {{ 'products.product.quantity.label' | t }}
+                    </label>
+                    <quantity-input class="quantity" style="background-color: {{ section.settings.quantity_container_bg_color }}; border: 1px solid {{ section.settings.quantity_border_color }};">
+                      <button class="quantity__button no-js-hidden" name="minus" type="button" aria-label="Decrease quantity" 
+                              style="background-color: {{ section.settings.quantity_button_bg_color }}; color: {{ section.settings.quantity_button_text_color }};">
+                        <span>−</span>
+                      </button>
+                      <input 
+                        class="quantity__input"
+                        type="number"
+                        name="quantity"
+                        id="Quantity-{{ section.id }}-{{ block.id }}"
+                        min="1"
+                        value="1"
+                        aria-label="Quantity"
+                        style="background-color: {{ section.settings.quantity_input_bg_color }}; 
+                               color: {{ section.settings.quantity_input_text_color }}; 
+                               border-left: 1px solid {{ section.settings.quantity_border_color }}; 
+                               border-right: 1px solid {{ section.settings.quantity_border_color }};"
+                      >
+                      <button class="quantity__button no-js-hidden" name="plus" type="button" aria-label="Increase quantity" 
+                              style="background-color: {{ section.settings.quantity_button_bg_color }}; color: {{ section.settings.quantity_button_text_color }};">
+                        <span>+</span>
+                      </button>
+                    </quantity-input>
+                  </div>
+                {% endif %}
+
+                {% comment %} Add to Cart Button {% endcomment %}
+                <div class="product-form__buttons">
+                  <button
+                    type="button"
+                    class="product-form__submit button"
+                    style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};"
+                    data-disabled-color="{{ section.settings.button_disabled_color }}"
+                    {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                  >
+                    <span data-default-text="{{ block.settings.button_text }}">
+                      {%- if product.selected_or_first_available_variant.available -%}
+                        {{ block.settings.button_text }}
+                      {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                      {%- endif -%}
+                    </span>
+                  </button>
+                </div>
+              </product-form>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  class VariantSelects extends HTMLElement {
+    constructor() {
+      super();
+      this.productData = null;
+      this.loadProductJson();
+      
+      // Get color settings
+      this.pillBgColor = this.dataset.pillBg;
+      this.pillBorderColor = this.dataset.pillBorder;
+      this.pillTextColor = this.dataset.pillText;
+      this.pillSelectedBgColor = this.dataset.pillSelectedBg;
+      this.pillSelectedTextColor = this.dataset.pillSelectedText;
+      
+      // Set up pill variant click events
+      this.pillVariants = this.querySelectorAll('.pill-variants');
+      this.pillVariants.forEach(pillGroup => {
+        const pills = pillGroup.querySelectorAll('.variant-pill');
+        pills.forEach(pill => {
+          pill.addEventListener('click', this.onPillClick.bind(this));
+        });
+      });
+    }
+
+    loadProductJson() {
+      const productId = this.dataset.productId;
+      const productJsonElement = document.getElementById(`ProductJson-${productId}`);
+      
+      if (productJsonElement) {
+        try {
+          this.productData = JSON.parse(productJsonElement.textContent);
+        } catch (error) {
+          console.error('Error parsing product JSON:', error);
+        }
+      } else {
+        console.error(`Product JSON element not found for product ID: ${productId}`);
+      }
+    }
+    
+    onPillClick(event) {
+      const pill = event.currentTarget;
+      const pillGroup = pill.closest('.pill-variants');
+      
+      // Update UI - clear previous selection and select new pill
+      pillGroup.querySelectorAll('.variant-pill').forEach(p => {
+        p.classList.remove('selected');
+        p.removeAttribute('aria-selected');
+        p.style.backgroundColor = this.pillBgColor;
+        p.style.color = this.pillTextColor;
+        p.style.borderColor = this.pillBorderColor;
+      });
+      
+      pill.classList.add('selected');
+      pill.setAttribute('aria-selected', 'true');
+      pill.style.backgroundColor = this.pillSelectedBgColor;
+      pill.style.color = this.pillSelectedTextColor;
+      pill.style.borderColor = this.pillSelectedBgColor;
+      
+      // Trigger variant change
+      this.onVariantChange();
+    }
+
+    onVariantChange() {
+      this.updateOptions();
+      this.updateVariantId();
+      
+      if (!this.currentVariant) {
+        this.toggleAddButton(true, '{{ 'products.product.unavailable' | t }}');
+        return;
+      }
+
+      this.updateURL();
+      this.updateFormID();
+      this.updatePrice();
+      this.updateVariantImage();
+    }
+
+    updateOptions() {
+      // Get selected options from pills
+      this.options = [];
+      this.pillVariants.forEach(pillGroup => {
+        const selectedPill = pillGroup.querySelector('.variant-pill.selected');
+        if (selectedPill) {
+          this.options.push(selectedPill.dataset.value);
+        } else {
+          // Select first pill if none selected
+          const firstPill = pillGroup.querySelector('.variant-pill');
+          if (firstPill) {
+            firstPill.classList.add('selected');
+            firstPill.setAttribute('aria-selected', 'true');
+            firstPill.style.backgroundColor = this.pillSelectedBgColor;
+            firstPill.style.color = this.pillSelectedTextColor;
+            firstPill.style.borderColor = this.pillSelectedBgColor;
+            this.options.push(firstPill.dataset.value);
+          }
+        }
+      });
+    }
+
+    updateVariantId() {
+      if (!this.productData) {
+        console.error('Product data is not loaded');
+        return;
+      }
+      
+      this.currentVariant = this.productData.variants.find((variant) => {
+        return !variant.options.some((option, index) => {
+          return this.options[index] !== option;
+        });
+      });
+    }
+
+    updateURL() {
+      if (!this.currentVariant || window.location.pathname.indexOf('/products/') === -1) return;
+      window.history.replaceState({}, '', `${window.location.pathname}?variant=${this.currentVariant.id}`);
+    }
+
+    updateFormID() {
+      const productForm = this.closest('product-form');
+      const input = productForm.querySelector('input[name="id"]');
+      if (input) {
+        input.value = this.currentVariant.id;
+      }
+    }
+    
+    updateVariantImage() {
+      if (!this.currentVariant) return;
+      
+      const sectionId = this.dataset.sectionId;
+      const blockId = this.dataset.blockId;
+      
+      const imageElement = document.getElementById(`ProductImage-${sectionId}-${blockId}`);
+      if (!imageElement) return;
+      
+      // Find the matching variant image
+      if (this.currentVariant.featured_image) {
+        const imageUrl = this.currentVariant.featured_image.src.replace(/(\.[^.]*)$/, "_400x400$1");
+        
+        // Fade effect
+        imageElement.style.opacity = '0.5';
+        
+        setTimeout(() => {
+          imageElement.src = imageUrl;
+          imageElement.alt = this.currentVariant.featured_image.alt || this.productData.title;
+          
+          imageElement.onload = function() {
+            this.style.opacity = '1';
+          };
+        }, 300);
+      }
+    }
+
+    updatePrice() {
+      if (!this.currentVariant) return;
+      
+      const sectionId = this.dataset.sectionId;
+      const blockId = this.dataset.blockId;
+      
+      // Direct price update without fetch
+      const priceContainer = document.getElementById(`price-${sectionId}-${blockId}`);
+      if (priceContainer) {
+        // Get color settings from the section settings
+        const priceColor = getComputedStyle(priceContainer.querySelector('.price-item--regular')).color;
+        const salePriceColor = priceContainer.querySelector('.price-item--sale') ? 
+                             getComputedStyle(priceContainer.querySelector('.price-item--sale')).color : 
+                             '#e4424b';
+        
+        // Format price
+        const price = this.currentVariant.price / 100; // Convert cents to dollars
+        const comparePrice = this.currentVariant.compare_at_price ? this.currentVariant.compare_at_price / 100 : null;
+        
+        // Format as currency
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD', // This might need to be dynamic based on store currency
+        });
+        
+        const formattedPrice = formatter.format(price);
+        
+        // Build HTML
+        let priceHTML = `<span class="price-item price-item--regular" style="color: ${priceColor};">${formattedPrice}</span>`;
+        
+        if (comparePrice && comparePrice > price) {
+          const formattedComparePrice = formatter.format(comparePrice);
+          priceHTML += `<span class="price-item price-item--sale" style="color: ${salePriceColor};"><s>${formattedComparePrice}</s></span>`;
+        }
+        
+        priceContainer.innerHTML = priceHTML;
+      }
+      
+      // Update submit button state
+      this.toggleAddButton(!this.currentVariant.available, '{{ 'products.product.sold_out' | t }}');
+    }
+
+    toggleAddButton(disable = true, text) {
+      const productForm = this.closest('product-form');
+      const addButton = productForm.querySelector('.product-form__submit');
+      if (!addButton) return;
+      
+      if (disable) {
+        addButton.setAttribute('disabled', true);
+        // Apply disabled color if available
+        if (addButton.dataset.disabledColor) {
+          addButton.style.backgroundColor = addButton.dataset.disabledColor;
+        }
+        if (text) addButton.querySelector('span').textContent = text;
+      } else {
+        addButton.removeAttribute('disabled');
+        // Restore original button color
+        addButton.style.backgroundColor = getComputedStyle(addButton).getPropertyValue('--original-bg-color') || '';
+        addButton.querySelector('span').textContent = addButton.querySelector('span').getAttribute('data-default-text') || 'Add to Cart';
+      }
+    }
+  }
+
+  class QuantityInput extends HTMLElement {
+    constructor() {
+      super();
+      this.input = this.querySelector('input');
+      this.changeEvent = new Event('change', { bubbles: true });
+      
+      this.querySelectorAll('button').forEach(
+        (button) => button.addEventListener('click', this.onButtonClick.bind(this))
+      );
+    }
+
+    onButtonClick(event) {
+      event.preventDefault();
+      const button = event.currentTarget;
+      
+      if (button.name === 'plus') {
+        this.input.stepUp();
+      } else {
+        this.input.stepDown();
+      }
+      
+      this.input.dispatchEvent(this.changeEvent);
+    }
+  }
+
+  class ProductForm extends HTMLElement {
+    constructor() {
+      super();
+      this.submitButton = this.querySelector('.product-form__submit');
+      
+      // Store original background color for later use
+      const originalBgColor = getComputedStyle(this.submitButton).backgroundColor;
+      this.submitButton.style.setProperty('--original-bg-color', originalBgColor);
+      
+      this.submitButton.addEventListener('click', this.onButtonClick.bind(this));
+    }
+
+    onButtonClick(event) {
+      event.preventDefault();
+      
+      // Don't proceed if button is disabled
+      if (this.submitButton.hasAttribute('disabled')) return;
+      
+      const variantId = this.querySelector('input[name="id"]').value;
+      const quantityInput = this.querySelector('.quantity__input');
+      const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+      
+      this.addToCart(variantId, quantity);
+    }
+
+    addToCart(variantId, quantity) {
+      this.submitButton.setAttribute('disabled', true);
+      this.submitButton.classList.add('loading');
+      
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: quantity
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Success - update cart UI without page reload
+        this.updateCartUI(data);
+      })
+      .catch(error => {
+        console.error('Error adding item to cart:', error);
+        // Show error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'cart-notification cart-notification--error';
+        errorMessage.textContent = 'Failed to add item to cart. Please try again.';
+        this.appendChild(errorMessage);
+        
+        // Auto-remove the error message after 3 seconds
+        setTimeout(() => {
+          errorMessage.remove();
+        }, 3000);
+      })
+      .finally(() => {
+        this.submitButton.classList.remove('loading');
+        this.submitButton.removeAttribute('disabled');
+        // Restore original button color
+        this.submitButton.style.backgroundColor = this.submitButton.style.getPropertyValue('--original-bg-color') || '';
+      });
+    }
+    
+    updateCartUI(data) {
+      // Show success message
+      const successMessage = document.createElement('div');
+      successMessage.className = 'cart-notification cart-notification--success';
+      successMessage.textContent = 'Item added to cart';
+      this.appendChild(successMessage);
+      
+      // Auto-remove the message after 3 seconds
+      setTimeout(() => {
+        successMessage.remove();
+      }, 3000);
+      
+      // Trigger standard theme events for cart update - use as many as possible for cross-theme compatibility
+      
+      // Trigger Shopify native event
+      if (window.Shopify && window.Shopify.onItemAdded) {
+        window.Shopify.onItemAdded(data);
+      }
+      
+      // Trigger standard theme events
+      document.documentElement.dispatchEvent(new CustomEvent('cart:item-added', {
+        bubbles: true,
+        detail: { product: data }
+      }));
+      
+      // Dawn theme event
+      document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+        bubbles: true
+      }));
+      
+      // Debut theme event
+      document.dispatchEvent(new CustomEvent('ajaxProduct:added', {
+        detail: {
+          product: data,
+          addToCartBtn: this.submitButton
+        }
+      }));
+      
+      // Broadcast theme event
+      document.dispatchEvent(new CustomEvent('theme:cart:change', {
+        bubbles: true,
+        detail: { cart: null }
+      }));
+      
+      // Empire theme event
+      window.dispatchEvent(new CustomEvent('theme:cart:updated', {
+        bubbles: true
+      }));
+      
+      // Streamline theme event
+      window.dispatchEvent(new Event('cart.requestComplete'));
+      
+      // Brooklyn theme event
+      if (typeof window.ajaxCart !== 'undefined' && window.ajaxCart.load) {
+        window.ajaxCart.load();
+      }
+      
+      // Fetch updated cart and dispatch the full cart data events
+      fetch('/cart.js', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+      .then(response => response.json())
+      .then(cart => {
+        // Try to use any theme-specific cart update functions
+        if (window.theme && window.theme.updateCartDrawer) {
+          window.theme.updateCartDrawer(cart);
+        }
+        
+        if (window.refreshCart) {
+          window.refreshCart(cart);
+        }
+        
+        if (window.theme && window.theme.updateAllCartReferences) {
+          window.theme.updateAllCartReferences(cart);
+        }
+        
+        // Dispatch cart events with the full cart object
+        document.dispatchEvent(new CustomEvent('cart:updated', {
+          bubbles: true,
+          detail: { cart: cart }
+        }));
+        
+        document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
+          detail: { cart: cart }
+        }));
+        
+        // Try to call the drawer open function if it exists
+        try {
+          if (window.theme && window.theme.openCartDrawer) {
+            window.theme.openCartDrawer();
+          } else if (typeof openCartDrawer === 'function') {
+            openCartDrawer();
+          } else if (typeof drawer_open === 'function') {
+            drawer_open('cart');
+          } else if (typeof drawerOpen === 'function') {
+            drawerOpen('cart-drawer');
+          }
+        } catch (e) {
+          console.log('Could not automatically open cart drawer');
+        }
+        
+        // Update count in all the common places
+        this.updateCartCountFromCart(cart);
+      })
+      .catch(error => {
+        console.error('Error fetching cart:', error);
+      });
+    }
+    
+    updateCartCount() {
+      fetch('/cart.js', { 
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => response.json())
+      .then(cart => {
+        this.updateCartCountFromCart(cart);
+      });
+    }
+    
+    updateCartCountFromCart(cart) {
+      const count = cart.item_count;
+      
+      // Common cart count selectors across many themes
+      const cartCountSelectors = [
+        '.cart-count', 
+        '.cart-count-bubble', 
+        '.cart-count-number', 
+        '[data-cart-count]', 
+        '.site-header__cart-count',
+        '.cart__count',
+        '#CartCount',
+        '.cart-drawer__count',
+        '#CartCountBubble',
+        '.header-cart-count',
+        '.cart-drawer-count'
+      ];
+      
+      for (const selector of cartCountSelectors) {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+          if (element.tagName === 'SPAN' || element.tagName === 'DIV') {
+            element.textContent = count;
+          } else {
+            element.setAttribute('data-cart-count', count);
+          }
+          
+          // Ensure it's visible
+          element.style.display = count > 0 ? '' : 'none';
+        });
+      }
+      
+      // Update any cart that has a data-cart-count attribute
+      const dataCartElements = document.querySelectorAll('[data-cart-count]');
+      dataCartElements.forEach(element => {
+        element.setAttribute('data-cart-count', count);
+      });
+    }
+  }
+
+  // Register custom elements
+  customElements.define('variant-selects', VariantSelects);
+  customElements.define('quantity-input', QuantityInput);
+  customElements.define('product-form', ProductForm);
+</script>

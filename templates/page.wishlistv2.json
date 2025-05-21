@@ -1,0 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "wishlistv2_MCWnCR": {
+      "type": "wishlistv2",
+      "settings": {
+        "swym_wishlist_title": "My Wishlist",
+        "swym_wishlist_empty_description": "<b>Your wishlist is empty</b><br> Click the heart button on your favorite products to add them to your wishlist<br><br>You can create multiple wishlists to organize your favorite items.",
+        "swym_wishlist_empty_action_button_cta": "Continue Shopping",
+        "swym_wishlist_item_cta_addtocart": "Add to Cart",
+        "swym_wishlist_item_cta_addingtocart": "Adding...",
+        "swym_wishlist_item_cta_addedtocart": "Added to Cart",
+        "swym_wishlist_item_cta_soldout": "Sold Out",
+        "swym_wishlist_show_vendor": true,
+        "swym_wishlist_show_price": true,
+        "swym_wishlist_show_addtocart": true,
+        "swym_wishlist_show_delete_item": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "wishlistv2_MCWnCR"
+  ]
+}
