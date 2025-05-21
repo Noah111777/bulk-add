@@ -40,6 +40,8 @@
 
   {%- render 'font-face' -%}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'bulk-variant-modal.css' | asset_url | stylesheet_tag }}
+  <style>:root{--bulk-modal-width:{{ settings.modal_width | default: 80 }}vw}</style>
   {%- render 'css-variables' -%}
 
   {% comment %}HC - ATC button - 26 Jan '24 {% endcomment %}
@@ -114,6 +116,7 @@
 
   <script src="{{ 'vendor-scripts-v2.js' | asset_url | split: '?' | first }}" defer="defer"></script>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  <script type="module" src="{{ 'bulk-variant-modal.js' | asset_url }}"></script>
 
   {%- if request.page_type contains 'customers/' -%}
     <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
@@ -185,6 +188,9 @@
     render 'photoswipe-template'
     if settings.quick_add_enable
       render 'quick-add-modal'
+    endif
+    if settings.enable_bulk_modal
+      render 'bulk-variant-modal'
     endif
   -%}
   <div id="ProductModals"></div>

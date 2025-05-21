@@ -237,6 +237,14 @@ assign hideprice    = false
         {%- endif -%}
       </div>
     {%- endif -%}
+    {% if settings.enable_bulk_modal %}
+      <button
+        class="btn btn--primary js-bulk-modal-open"
+        type="button"
+        data-product-handle="{{ product.handle }}">
+        {{ 'products.product.add_to_cart' | t }}
+      </button>
+    {% endif %}
   {%- endcapture -%}
 
   <div class="page-content page-content--product">
